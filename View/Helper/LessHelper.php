@@ -2,7 +2,7 @@
 /**
  * Simple helper for using lessc with cakephp
  * @author Òscar Casajuana <elboletaire@underave.net>
- * @version 1.0
+ * @version 1.2
  */
 
 App::uses('AppHelper', 'View/Helper');
@@ -63,7 +63,6 @@ class LessHelper extends AppHelper
 	{
 		parent::__construct($View, $settings);
 
-		App::import('Vendor', 'lessphp/lessc', array('file' => 'lessphp' . DS . 'lessc.inc.php'));
 		$this->Lessc = new lessc();
 
 		$this->less_path = trim($this->less_path, '/');
@@ -149,7 +148,14 @@ class LessHelper extends AppHelper
 			$cache = $input;
 		}
 
+		// Set priority between importing webroot/less and Bootstrap/webroot/less folders
+		$this->Lessc->setImportDir(array(dirname($input), App::pluginPath('Bootstrap') . 'webroot' . DS . 'less'));
+
 		$new_cache = $this->Lessc->cachedCompile($cache);
+
+		if (empty($new_cache) || empty($new_cache['compiled'])) {
+			throw new Exception("Error compiling less file");
+		}
 
 		if (!is_array($cache) || $new_cache['updated'] > $cache['updated']) {
 			if (false === file_put_contents($cache_file, serialize($new_cache))) {
@@ -160,6 +166,13 @@ class LessHelper extends AppHelper
 			}
 			return true;
 		}
+
+		if (isset($cache['compiled']) && file_exists($cache_file) && !file_exists($output)) {
+			if (false === file_put_contents($output, $new_cache['compiled'])) {
+				throw new Exception("Could not write output css file to $output");
+			}
+		}
+
 		return false;
 	}
 
@@ -187,7 +200,7 @@ class LessHelper extends AppHelper
 		}
 
 		if (empty($options['less'])) {
-			$options['less'] = 'less.min';
+			$options['less'] = '/Bootstrap/js/less.min';
 		}
 
 		return $this->options = $options;
