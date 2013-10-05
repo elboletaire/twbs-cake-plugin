@@ -4,6 +4,9 @@
  * @author Òscar Casajuana <elboletaire@underave.net>
  * @version 1.0
  */
+
+App::uses('AppHelper', 'View/Helper');
+
 class LessHelper extends AppHelper
 {
 	public $helpers = array('Html', 'Javascript');
