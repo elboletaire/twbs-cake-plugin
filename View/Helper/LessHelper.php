@@ -57,6 +57,13 @@ class LessHelper extends AppHelper
 	private $less_path = 'less';
 
 /**
+ * The less files html <link> tag
+ * 
+ * @var string
+ */
+	private $link_tag = '<link rel="stylesheet/less" href="%s" />';
+
+/**
  * Initializes Lessc and cleans less and css paths
  */
 	public function __construct(View $View, $settings = array())
@@ -121,9 +128,16 @@ class LessHelper extends AppHelper
 		$lessjs = $options['less'];
 		$this->cleanOptions($options);
 
-		$return = sprintf('<link rel="stylesheet/less" href="%s" />', Router::url('/' . $this->less_path . '/' . $less));
+		$return = '';
+		// Append the user less file
+		$return .= sprintf($this->link_tag, Router::url('/' . $this->less_path . '/' . $less));
+		// Less.js configuration
 		$return .= $this->Html->scriptBlock(sprintf('less = %s;', json_encode($options)));
+		// <link> tag for less.js file
 		$return .= $this->Html->script($lessjs);
+		// Set @bootstrap variable
+		$return .= $this->Html->scriptBlock('less.modifyVars({"bootstrap": \'"/Bootstrap/less/"\'}, true);');
+		// Kown bug: throw of an "undefined variable @bootstrap" notice
 
 		return $return;
 	}
@@ -150,6 +164,10 @@ class LessHelper extends AppHelper
 
 		// Set priority between importing webroot/less and Bootstrap/webroot/less folders
 		$this->Lessc->setImportDir(array(dirname($input), App::pluginPath('Bootstrap') . 'webroot' . DS . 'less'));
+
+		$this->Lessc->setVariables(array(
+			'bootstrap' => '""'
+		));
 
 		$new_cache = $this->Lessc->cachedCompile($cache);
 
