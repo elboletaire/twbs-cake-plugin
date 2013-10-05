@@ -6,7 +6,7 @@
     "require": {
         "php": ">=5.3.0",
         "composer/installers": "*",
-        "leafo/lessphp": "v0.4.0"
+        "leafo/lessphp": "0.4.*"
     },
     "extra": {
     	"installer-name": "Bootstrap"

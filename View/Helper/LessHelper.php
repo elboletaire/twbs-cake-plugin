@@ -9,7 +9,7 @@ App::uses('AppHelper', 'View/Helper');
 
 class LessHelper extends AppHelper
 {
-	public $helpers = array('Html', 'Javascript');
+	public $helpers = array('Html');
 
 /**
  * Default lesscss options. 
@@ -59,13 +59,16 @@ class LessHelper extends AppHelper
 /**
  * Initializes Lessc and cleans less and css paths
  */
-	public function __construct()
+	public function __construct(View $View, $settings = array())
 	{
+		parent::__construct($View, $settings);
+
 		App::import('Vendor', 'lessphp/lessc', array('file' => 'lessphp' . DS . 'lessc.inc.php'));
 		$this->Lessc = new lessc();
 
 		$this->less_path = trim($this->less_path, '/');
 		$this->css_path  = trim($this->css_path, '/');
+
 	}
 
 /**
