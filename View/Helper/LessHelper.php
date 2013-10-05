@@ -13,7 +13,6 @@ class LessHelper extends AppHelper
 
 /**
  * Default lesscss options. 
- * The rootpath is automatically set depending on the env variable
  * 
  * @var array
  */
@@ -55,13 +54,6 @@ class LessHelper extends AppHelper
  * @var string
  */
 	private $less_path = 'less';
-
-/**
- * The less files html <link> tag
- * 
- * @var string
- */
-	private $link_tag = '<link rel="stylesheet/less" href="%s" />';
 
 /**
  * Initializes Lessc and cleans less and css paths
@@ -130,12 +122,12 @@ class LessHelper extends AppHelper
 
 		$return = '';
 		// Append the user less file
-		$return .= sprintf($this->link_tag, Router::url('/' . $this->less_path . '/' . $less));
+		$return .= $this->Html->useTag('metalink', Router::url('/' . $this->less_path . '/' . $less), array('rel' => 'stylesheet/less'));
 		// Less.js configuration
 		$return .= $this->Html->scriptBlock(sprintf('less = %s;', json_encode($options)));
-		// <link> tag for less.js file
+		// <script> tag for less.js file
 		$return .= $this->Html->script($lessjs);
-		// Set @bootstrap variable
+		// Set @bootstrap variable and reload .less files
 		$return .= $this->Html->scriptBlock('less.modifyVars({"bootstrap": \'"/Bootstrap/less/"\'}, true);');
 		// Kown bug: throw of an "undefined variable @bootstrap" notice
 
