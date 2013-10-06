@@ -1,5 +1,5 @@
 {
-    "name": "elboletaire/cakephp-bootstrap",
+    "name": "cms/bootstrap",
     "description": "CakePHP Bootstrap Plugin",
     "type": "cakephp-plugin",
     "keywords": ["cakephp", "bootstrap", "plugin"],
