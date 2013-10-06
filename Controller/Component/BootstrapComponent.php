@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @author  Òscar Casajuana <elboletaire@underave.net>
+ */
 class BootstrapComponent extends Object 
 {
 /**
