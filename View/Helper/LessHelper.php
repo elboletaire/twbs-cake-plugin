@@ -1,19 +1,20 @@
 <?php
+namespace Boolstrap\View\Helper;
+
+use App\View\Helper\AppHelper;
+
 /**
  * Simple helper for using lessc with cakephp
  * @author Òscar Casajuana <elboletaire@underave.net>
  * @version 1.2
  */
-
-App::uses('AppHelper', 'View/Helper');
-
 class LessHelper extends AppHelper
 {
 	public $helpers = array('Html');
 
 /**
- * Default lesscss options. 
- * 
+ * Default lesscss options.
+ *
  * @var array
  */
 	public $less_options = array(
@@ -22,35 +23,35 @@ class LessHelper extends AppHelper
 
 /**
  * The resulting options array from merging default and user values (on setOptions)
- * 
+ *
  * @var array
  */
 	private $options = array();
 
 /**
  * Stores the compilation error, in case it occurs
- * 
+ *
  * @var boolean
  */
 	public $error = false;
 
 /**
  * The lessphp compiler instance
- * 
+ *
  * @var lessc
  */
 	private $Lessc; // the less compiler instance
 
 /**
  * The css path name, where the output files will be stored
- * 
+ *
  * @var string
  */
 	private $css_path  = 'css';
 
 /**
  * The lesscss path name, where all original .less files reside
- * 
+ *
  * @var string
  */
 	private $less_path = 'less';
@@ -71,9 +72,9 @@ class LessHelper extends AppHelper
 
 /**
  * Compile the less and return a css <link> tag.
- * In case of error, it will load less with  javascript 
+ * In case of error, it will load less with  javascript
  * instead of returning the resulting css <link> tag.
- * 
+ *
  * @param  string $less The input .less file to be compiled
  * @param  array  $options An array of options to be passed as a json to the less javascript object.
  * @return string The resulting <link> tag for the compiled css, or the <link> tag for the .less & less.min if compilation fails
@@ -108,7 +109,7 @@ class LessHelper extends AppHelper
 
 /**
  * Returns the initialization string for less (javascript based)
- * 
+ *
  * @param  string $less The input .less file to be loaded
  * @param  array  $options An array of options to be passed to the `less` configuration var
  * @return string The link + script tags need to launch lesscss
@@ -136,7 +137,7 @@ class LessHelper extends AppHelper
 
 /**
  * Compiles an input less file to an output css file using the PHP compiler
- * 
+ *
  * @param  string $input The input .less file to be compiled
  * @param  string $output The output .css file, resulting from the compilation
  * @return boolean true on success, false otherwise
@@ -189,7 +190,7 @@ class LessHelper extends AppHelper
 /**
  * Sets the less configuration var options based on the ones given by the user
  * and our default ones.
- * 
+ *
  * @param string $less The input .less file to be processed
  * @param array  $options An array of options to be passed to the javascript less configuration var
  * @return array $options The resulting $options array
