@@ -1,12 +1,14 @@
 <?php
+namespace Boolstrap\Controller\Component;
+
 /**
  * @author  Òscar Casajuana <elboletaire@underave.net>
  */
-class BootstrapComponent extends Object 
+class BootstrapComponent extends Object
 {
 /**
  * Flash element type aliases
- * 
+ *
  * @var array
  */
 	private $aliases = array(
@@ -19,12 +21,12 @@ class BootstrapComponent extends Object
 /**
  * {@inheritdoc}
  */
-	public function initialize(Controller &$controller, $settings = array()) {}
+	// public function initialize(Controller &$controller, $settings = array()) {}
 
 /**
  * {@inheritdoc}
  */
-	public function startup(Controller &$controller) {}
+	// public function startup(Controller &$controller) {}
 
 /**
  * {@inheritdoc}
@@ -37,7 +39,7 @@ class BootstrapComponent extends Object
 /**
  * {@inheritdoc}
  */
-	public function shutdown(Controller &$controller) {}
+	// public function shutdown(Controller &$controller) {}
 
 /**
  * {@inheritdoc}
@@ -53,7 +55,7 @@ class BootstrapComponent extends Object
  *
  * Replaces the flash message with the bootstraped one. It takes the
  * $element param as the flash message class.
- * 
+ *
  * @return void
  */
 	private function replaceFlashMessage()
@@ -77,7 +79,7 @@ class BootstrapComponent extends Object
 
 /**
  * Returns the flash class name depending on it's alias
- * 
+ *
  * @param  string $name The alias name.
  * @return string       Equivalent class name. If it does not exist will return $name.
  */
