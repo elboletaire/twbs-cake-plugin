@@ -1,5 +1,5 @@
 <?php
-namespace Boolstrap\View\Helper;
+namespace Bootstrap\View\Helper;
 
 use App\View\Helper\AppHelper;
 

@@ -1,10 +1,12 @@
 <?php
-namespace Boolstrap\Controller\Component;
+namespace Bootstrap\Controller\Component;
+
+use Cake\Controller\Component;
 
 /**
  * @author  Òscar Casajuana <elboletaire@underave.net>
  */
-class BootstrapComponent extends Object
+class Bootstrap extends Component
 {
 /**
  * Flash element type aliases
