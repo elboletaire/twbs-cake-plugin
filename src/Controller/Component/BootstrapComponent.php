@@ -1,13 +1,18 @@
 <?php
 namespace Bootstrap\Controller\Component;
 
+use Cake\Event\Event;
+use Cake\Controller;
 use Cake\Controller\Component;
+use Cake\Controller\ComponentRegistry;
+use Cake\Controller\Component\SessionComponent;
 
 /**
  * @author  Òscar Casajuana <elboletaire@underave.net>
  */
-class Bootstrap extends Component
+class BootstrapComponent extends Component
 {
+	public $components = ['Session'];
 /**
  * Flash element type aliases
  *
@@ -23,17 +28,7 @@ class Bootstrap extends Component
 /**
  * {@inheritdoc}
  */
-	// public function initialize(Controller &$controller, $settings = array()) {}
-
-/**
- * {@inheritdoc}
- */
-	// public function startup(Controller &$controller) {}
-
-/**
- * {@inheritdoc}
- */
-	public function beforeRender(Controller &$controller)
+	public function beforeRender(Event $event)
 	{
 		$this->replaceFlashMessage();
 	}
@@ -41,15 +36,10 @@ class Bootstrap extends Component
 /**
  * {@inheritdoc}
  */
-	// public function shutdown(Controller &$controller) {}
-
-/**
- * {@inheritdoc}
- */
-	public function beforeRedirect(Controller &$controller, $url, $status = null, $exit = true)
+	public function beforeRedirect(Event $event, $url, $response)
 	{
 		$this->replaceFlashMessage();
-		return parent::beforeRedirect($controller, $url, $status, $exit);
+		return parent::beforeRedirect($event, $controller, $url, $response);
 	}
 
 /**
@@ -62,7 +52,7 @@ class Bootstrap extends Component
  */
 	private function replaceFlashMessage()
 	{
-		if (!$flash = CakeSession::read('Message.flash'))
+		if (!$flash = $this->Session->read('Message.flash'))
 		{
 			return;
 		}
@@ -75,7 +65,7 @@ class Bootstrap extends Component
 					'plugin' => 'Bootstrap'
 				)
 			));
-			CakeSession::write('Message.flash', $flash);
+			$this->Session->write('Message.flash', $flash);
 		}
 	}
 
