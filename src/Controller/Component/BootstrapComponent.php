@@ -36,15 +36,6 @@ class BootstrapComponent extends Component
 	}
 
 /**
- * {@inheritdoc}
- */
-	public function beforeRedirect(Event $event, $url, $response)
-	{
-		$this->replaceFlashMessage();
-		return parent::beforeRedirect($event, $controller, $url, $response);
-	}
-
-/**
  * Replace flash message
  *
  * Replaces the flash message with the bootstraped one. It takes the
