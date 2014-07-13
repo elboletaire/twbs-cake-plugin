@@ -59,6 +59,17 @@ use Cake\Routing\Router;
             <p class="navbar-text">proudly created by ÒCA a.k.a. elboletaire</p>
         </footer>
     </div>
+    <?= $this->Html->script([
+        'http://code.jquery.com/jquery-2.1.1.min.js',
+        '/bootstrap/js/transition',
+        '/bootstrap/js/collapse',
+        '/bootstrap/js/dropdown',
+        '/bootstrap/js/alert',
+        '/bootstrap/js/modal',
+        '/bootstrap/js/tooltip',
+        '/bootstrap/js/popover',
+        '/bootstrap/js/tab'
+    ]); ?>
     <?= $this->fetch('script'); ?>
 </body>
 </html>
