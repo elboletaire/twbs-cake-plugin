@@ -79,7 +79,7 @@ public function beforeFilter(Event $event)
 }
 ```
 
-But I suppose you want your custom template. To do so, simply use the [LessHelper](#LessHelper):
+But I suppose you want your custom template. To do so, simply use the [LessHelper](#lesshelper):
 
 ```php
 echo $this->Less->less('styles.less');
