@@ -1,6 +1,8 @@
 <?php
 namespace Bootstrap\View\Helper;
 
+use Cake\View\View;
+use Cake\Routing\Router;
 use App\View\Helper\AppHelper;
 
 /**
@@ -59,11 +61,15 @@ class LessHelper extends AppHelper
 /**
  * Initializes Lessc and cleans less and css paths
  */
-	public function __construct(View $View, $settings = array())
+	public function __construct(View $View, array $config = array())
 	{
-		parent::__construct($View, $settings);
+		parent::__construct($View, $config);
 
-		$this->Lessc = new lessc();
+		require ROOT . DS . 'vendor' . DS . 'oyejorge' . DS . 'less.php' . DS . 'lib' . DS . 'Less' . DS . 'Autoloader.php';
+
+		\Less_Autoloader::register();
+
+		$this->Lessc = new \Less_Parser(array('compress' => true));
 
 		$this->less_path = trim($this->less_path, '/');
 		$this->css_path  = trim($this->css_path, '/');
@@ -80,11 +86,10 @@ class LessHelper extends AppHelper
  * @return string The resulting <link> tag for the compiled css, or the <link> tag for the .less & less.min if compilation fails
  * @throws Exception
  */
-	public function less($less = 'styles.less', array $options = array())
+	public function less($less = 'styles.less', array $options = array(), array $modify_vars = array())
 	{
-		$options = $this->setOptions($less, $options);
+		$options = $this->setOptions($options);
 
-		$css = $options['output'];
 		$this->cleanOptions($options);
 
 		if ($options['env'] == 'development')
@@ -94,7 +99,10 @@ class LessHelper extends AppHelper
 
 		try
 		{
-			$this->compile($less, $css);
+			$css = $this->compile($less, $modify_vars, $this->options['cache']);
+			if (isset($this->options['tag']) && !$this->options['tag']) {
+				return $css;
+			}
 			return $this->Html->css($css);
 		}
 		catch (Exception $e)
@@ -102,7 +110,7 @@ class LessHelper extends AppHelper
 			$this->error = $e->getMessage();
 
 			$this->log("Error compiling less file: " . $this->error, 'less');
-			// maybe here we should also add a trigger_error, but less.js should treat the error as we're gonna load it now
+
 			return $this->jsBlock($less, $options);
 		}
 	}
@@ -122,14 +130,16 @@ class LessHelper extends AppHelper
 		$this->cleanOptions($options);
 
 		$return = '';
-		// Append the user less file
-		$return .= $this->Html->useTag('metalink', Router::url('/' . $this->less_path . '/' . $less), array('rel' => 'stylesheet/less'));
+		// Append the user less files
+		foreach ($less as $les) {
+			$this->Html->tag('metalink', Router::url('/' . $this->less_path . '/' . $les), array('rel' => 'stylesheet/less'));
+		}
 		// Less.js configuration
 		$return .= $this->Html->scriptBlock(sprintf('less = %s;', json_encode($options)));
 		// <script> tag for less.js file
 		$return .= $this->Html->script($lessjs);
 		// Set @bootstrap variable and reload .less files
-		$return .= $this->Html->scriptBlock('less.modifyVars({"bootstrap": \'"/Bootstrap/less/"\'}, true);');
+		// $return .= $this->Html->scriptBlock('less.modifyVars({"bootstrap": \'"/Bootstrap/less/"\'}, true);');
 		// Kown bug: throw of an "undefined variable @bootstrap" notice
 
 		return $return;
@@ -142,49 +152,29 @@ class LessHelper extends AppHelper
  * @param  string $output The output .css file, resulting from the compilation
  * @return boolean true on success, false otherwise
  */
-	public function compile($input, $output)
+	public function compile($input, $modify_vars = array(), $cache = true)
 	{
-		// load cache file
-		$cache_file = CACHE . basename($input) . '.cache';
-		$input      = WWW_ROOT . $this->less_path . DS . basename($input);
-		$output     = WWW_ROOT . $this->css_path  . DS . basename($output);
-
-		if (file_exists($cache_file)) {
-			$cache = unserialize(file_get_contents($cache_file));
-		} else {
-			$cache = $input;
+		if (!is_array($input)) {
+			$input = array($input);
 		}
 
-		// Set priority between importing webroot/less and Bootstrap/webroot/less folders
-		$this->Lessc->setImportDir(array(dirname($input), App::pluginPath('Bootstrap') . 'webroot' . DS . 'less'));
-
-		$this->Lessc->setVariables(array(
-			'bootstrap' => '""'
-		));
-
-		$new_cache = $this->Lessc->cachedCompile($cache);
-
-		if (empty($new_cache) || empty($new_cache['compiled'])) {
-			throw new Exception("Error compiling less file");
+		$to_parse = array();
+		foreach ($input as $in) {
+			$in = realpath(WWW_ROOT . $this->less_path . DS . $in);
+			$to_parse[$in] = '';
 		}
 
-		if (!is_array($cache) || $new_cache['updated'] > $cache['updated']) {
-			if (false === file_put_contents($cache_file, serialize($new_cache))) {
-				throw new Exception("Could not write less cache file to $cache_file");
-			}
-			if (false === file_put_contents($output, $new_cache['compiled'])) {
-				throw new Exception("Could not write output css file to $output");
-			}
-			return true;
+		if ($cache) {
+			\Less_Cache::$cache_dir = WWW_ROOT . $this->css_path . DS;
+
+			return \Less_Cache::Get($to_parse, array(), $modify_vars);
 		}
 
-		if (isset($cache['compiled']) && file_exists($cache_file) && !file_exists($output)) {
-			if (false === file_put_contents($output, $new_cache['compiled'])) {
-				throw new Exception("Could not write output css file to $output");
-			}
+		foreach ($to_parse as $file => $empty) {
+			$this->Lessc->parseFile($file, '');
 		}
 
-		return false;
+		return $this->Lessc->getCss();
 	}
 
 /**
@@ -195,23 +185,18 @@ class LessHelper extends AppHelper
  * @param array  $options An array of options to be passed to the javascript less configuration var
  * @return array $options The resulting $options array
  */
-	private function setOptions($less, array $options)
+	private function setOptions(array $options)
 	{
-		if (!empty($this->options)) {
-			return $this->options;
-		}
-
 		$options = array_merge($this->less_options, $options);
 
 		$options['rootpath'] = Router::url('/');
 
-		if (empty($options['output'])) {
-			$pathinfo = pathinfo($less);
-			$options['output'] = $pathinfo['filename'] . '.css';
+		if (empty($options['less'])) {
+			$options['less'] = 'less.min';
 		}
 
-		if (empty($options['less'])) {
-			$options['less'] = '/Bootstrap/js/less.min';
+		if (!isset($options['cache'])) {
+			$options['cache'] = true;
 		}
 
 		return $this->options = $options;
@@ -219,6 +204,6 @@ class LessHelper extends AppHelper
 
 	private function cleanOptions(array &$options)
 	{
-		unset($options['output'], $options['less']);
+		unset($options['output'], $options['less'], $options['tag'], $options['cache']);
 	}
 }
