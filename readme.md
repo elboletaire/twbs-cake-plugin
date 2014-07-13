@@ -114,7 +114,7 @@ echo $this->Less->less('styles.less');
 You can compile multiple files if you pass an array:
 
 ```php
-echo $this->Less->less(['myreset.less', styles.less']);
+echo $this->Less->less(['myreset.less', 'styles.less']);
 // They will be compiled in the same file, so the result will be the same as the previous one
 <link rel="stylesheet" href="/css/lessphp_e0ce907005730c33ca6ae810d15f57a4df76d330.css"/>
 ```
