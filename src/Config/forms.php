@@ -1,6 +1,6 @@
 <?php
 $config = [
-    'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
-    'input' => '<input type="{{type}}" name="{{name}}"{{attrs}} class="form-control" />',
-    'checkboxFormGroup' => '{{input}}'
+    'inputContainer'      => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
+    'inputContainerError' => '<div class="form-group {{type}}{{required}} has-error">{{content}}</div>',
+    'checkboxFormGroup'   => '{{input}}'
 ];

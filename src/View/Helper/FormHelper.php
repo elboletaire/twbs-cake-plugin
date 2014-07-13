@@ -28,19 +28,37 @@ class FormHelper extends Helper\FormHelper
 
 	public function button($title, array $options = array())
 	{
-		$options += ['class' => 'btn btn-default'];
+		$options += ['class' => 'btn-default'];
+		// always add .btn class
+		$options = $this->addClass($options, 'btn');
 		return parent::button($title, $options);
 	}
 
 	public function formatTemplate($name, $data)
 	{
-
 		switch ($name) {
 			case 'checkboxFormGroup':
-				$data['input'] = preg_replace('/(<label for="[a-z]+">)([^<]+)(<\/label>)/i', "$1${data['input']} $2$3", $data['label']);
+				$data['input'] = preg_replace('/(<label(?:[^>]+)>)([^<]+)(<\/label>)/i', "$1${data['input']} $2$3", $data['label']);
 				unset($data['label']);
-				break;
+			break;
+			case 'text':
+				debug($data);
+			break;
 		}
 		return parent::formatTemplate($name, $data);
+	}
+
+	protected function _getInput($fieldName, $options)
+	{
+		if (in_array($options['type'], array('select', 'url', 'text', 'textarea'))) {
+			$options = $this->addClass($options, 'form-control');
+		}
+		return parent::_getInput($fieldName, $options);
+	}
+
+	public function label($fieldName, $text = null, array $options = [])
+	{
+		$options = $this->addClass($options, 'control-label');
+		return parent::label($fieldName, $text, $options);
 	}
 }

@@ -19,10 +19,12 @@ class BootstrapComponent extends Component
  * @var array
  */
 	private $aliases = array(
-		'default' => 'success',
-		'notice'  => 'info',
-		'warn'    => 'warning',
-		'error'   => 'danger'
+		'Flash/success' => 'success',
+		'Flash/notice'  => 'info',
+		'Flash/warn'    => 'warning',
+		'Flash/warning' => 'warning',
+		'Flash/error'   => 'danger',
+		'Flash/danger'  => 'danger'
 	);
 
 /**
@@ -52,12 +54,11 @@ class BootstrapComponent extends Component
  */
 	private function replaceFlashMessage()
 	{
-		if (!$flash = $this->Session->read('Message.flash'))
-		{
+		if (!$flash = $this->Session->read('Flash.flash')) {
 			return;
 		}
 
-		if (in_array($flash['element'], array('default', 'success', 'error', 'notice', 'info', 'warning'))) {
+		if (in_array($flash['element'], array_keys($this->aliases))) {
 			$flash = array_replace_recursive($flash, array(
 				'element' => 'flash',
 				'params'  => array(
@@ -65,7 +66,7 @@ class BootstrapComponent extends Component
 					'plugin' => 'Bootstrap'
 				)
 			));
-			$this->Session->write('Message.flash', $flash);
+			$this->Session->write('Flash.flash', $flash);
 		}
 	}
 
