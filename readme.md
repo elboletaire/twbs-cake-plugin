@@ -6,7 +6,12 @@ With a component and some helpers it automatically replaces cakePHP's elements l
 
 ## Dependencies
 
-- [oyejorge/less.php](https://github.com/oyejorge/less.php)
+- [oyejorge/less.php](https://github.com/oyejorge/less.php) version >= 1.7.0
+
+### Included files
+
+- [twbs/bootstrap](https://github.com/twbs/bootstrap): [version 3.2.0 (rev. 2c540b7e330eb2e)](https://github.com/twbs/bootstrap/tree/2c540b7e330eb2e8ecedfd7d62fb603f96ee39db)
+- [less.js](https://github.com/less/less.js): [version 1.7.3](https://raw.githubusercontent.com/less/less.js/master/dist/less-1.7.3.min.js)
 
 ## Installation
 
