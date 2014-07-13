@@ -14,23 +14,27 @@ use App\View\Helper\AppHelper;
  */
 class LessHelper extends AppHelper
 {
-	public $helpers = array('Html');
+	public $helpers = [
+		'Html'
+	];
 
 /**
  * Default lessjs options. Some are defined on setOptions due to the need of using methods.
  *
  * @var array
  */
-	public $lessjs_defaults = array(
+	public $lessjs_defaults = [
 		'env'      => 'production'
-	);
+	];
 
 /**
  * Default lessc options. Some are defined on setOptions due to the need of using methods.
  *
  * @var array
  */
-	private $parser_defaults = array();
+	private $parser_defaults = [
+		'compress' => true
+	];
 
 /**
  * Stores the compilation error, in case it occurs
@@ -56,7 +60,7 @@ class LessHelper extends AppHelper
 /**
  * Initializes Lessc and cleans less and css paths
  */
-	public function __construct(View $View, array $config = array())
+	public function __construct(View $View, array $config = [])
 	{
 		parent::__construct($View, $config);
 
@@ -80,7 +84,7 @@ class LessHelper extends AppHelper
  * @return string The resulting <link> tag for the compiled css, or the <link> tag for the .less & less.min if compilation fails
  * @throws Exception
  */
-	public function less($less = 'styles.less', array $options = array(), array $modify_vars = array())
+	public function less($less = 'styles.less', array $options = [], array $modify_vars = [])
 	{
 		$options = $this->setOptions($options);
 		if (!is_array($less)) {
@@ -97,6 +101,9 @@ class LessHelper extends AppHelper
 			$css = $this->compile($less, $options['parser'], $modify_vars, $options['cache']);
 			if (isset($options['tag']) && !$options['tag']) {
 				return $css;
+			}
+			if (!$options['cache']) {
+				return $this->Html->formatTemplate('style', ['content' => $css]);
 			}
 			return $this->Html->css($css);
 		}
@@ -117,15 +124,15 @@ class LessHelper extends AppHelper
  * @param  array  $options An array of options to be passed to the `less` configuration var
  * @return string The link + script tags need to launch lesscss
  */
-	public function jsBlock($less, array $options = array())
+	public function jsBlock($less, array $options = [])
 	{
 		$return = '';
 		// Append the user less files
 		foreach ($less as $les) {
-			$return .= $this->Html->meta('link', null, array(
+			$return .= $this->Html->meta('link', null, [
 				'link' => Router::url('/' . $this->less_path . '/' . $les),
 				'rel' => 'stylesheet/less'
-			));
+			]);
 		}
 		// Less.js configuration
 		$return .= $this->Html->scriptBlock(sprintf('less = %s;', json_encode($options['js'])));
@@ -142,9 +149,9 @@ class LessHelper extends AppHelper
  * @param  string $output The output .css file, resulting from the compilation
  * @return boolean true on success, false otherwise
  */
-	public function compile($input, array $options = array(), array $modify_vars = array(), $cache = true)
+	public function compile($input, array $options = [], array $modify_vars = [], $cache = true)
 	{
-		$to_parse = array();
+		$to_parse = [];
 		foreach ($input as $in) {
 			$in = realpath(WWW_ROOT . $this->less_path . DS . $in);
 			$to_parse[$in] = '';
@@ -175,7 +182,7 @@ class LessHelper extends AppHelper
  */
 	private function setOptions(array $options)
 	{
-		$this->parser_defaults = array(
+		$this->parser_defaults = array_merge($this->parser_defaults, [
 			'import_callback' => function($lessTree) {
 				if ($path_and_uri = $lessTree->PathAndUri()) {
 					return $path_and_uri;
@@ -185,15 +192,15 @@ class LessHelper extends AppHelper
 
 				$bootstrap_file = Plugin::path('Bootstrap') . 'webroot' . DS . $basefile;
 				if (file_exists($bootstrap_file)) {
-					return array($bootstrap_file, dirname($basefile) . '/');
+					return [$bootstrap_file, dirname($basefile) . '/'];
 				}
 
 				return null;
 			}
-		);
-		$this->lessjs_defaults = array_merge($this->lessjs_defaults, array(
+		]);
+		$this->lessjs_defaults = array_merge($this->lessjs_defaults, [
 			'rootpath' => Router::url('/')
-		));
+		]);
 
 		if (empty($options['parser'])) {
 			$options['parser'] = $this->parser_defaults;
