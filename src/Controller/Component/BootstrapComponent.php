@@ -51,10 +51,9 @@ class BootstrapComponent extends Component
 
 		if (in_array($flash['element'], array_keys($this->aliases))) {
 			$flash = array_replace_recursive($flash, array(
-				'element' => 'flash',
+				'element' => 'Bootstrap.flash',
 				'params'  => array(
-					'class'  => $this->getFlashClassName($flash['element']),
-					'plugin' => 'Bootstrap'
+					'class'  => $this->getFlashClassName($flash['element'])
 				)
 			));
 			$this->Session->write('Flash.flash', $flash);
