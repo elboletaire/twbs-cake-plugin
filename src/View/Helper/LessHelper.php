@@ -87,9 +87,7 @@ class LessHelper extends AppHelper
 	public function less($less = 'styles.less', array $options = [], array $modify_vars = [])
 	{
 		$options = $this->setOptions($options);
-		if (!is_array($less)) {
-			$less = array($less);
-		}
+		$less = (array)$less;
 
 		if ($options['js']['env'] == 'development')
 		{

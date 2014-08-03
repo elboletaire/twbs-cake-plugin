@@ -19,6 +19,9 @@ class FormHelper extends Helper\FormHelper
 	// Load custom templates
 	public function __construct(View $View, array $config = [])
 	{
+		// Force templateClass
+		$config['templateClass'] = 'Bootstrap\View\StringTemplate';
+
 		parent::__construct($View, $config);
 
 		$form_templates = App::path('Config', 'Bootstrap');
@@ -48,21 +51,6 @@ class FormHelper extends Helper\FormHelper
 /**
  * {@inheritdoc}
  */
-	// We need to directly modify checkboxFormGroup in order to have labels wrapping checkboxes
-	public function formatTemplate($name, $data)
-	{
-		switch ($name) {
-			case 'checkboxFormGroup':
-				$data['input'] = preg_replace('/(<label(?:[^>]+)>)([^<]+)(<\/label>)/i', "$1${data['input']} $2$3", $data['label']);
-				unset($data['label']);
-			break;
-		}
-		return parent::formatTemplate($name, $data);
-	}
-
-/**
- * {@inheritdoc}
- */
 	// Add classes to inputs
 	protected function _getInput($fieldName, $options)
 	{
@@ -70,15 +58,5 @@ class FormHelper extends Helper\FormHelper
 			$options = $this->addClass($options, 'form-control');
 		}
 		return parent::_getInput($fieldName, $options);
-	}
-
-/**
- * {@inheritdoc}
- */
-	// Add classes to labels
-	public function label($fieldName, $text = null, array $options = [])
-	{
-		$options = $this->addClass($options, 'control-label');
-		return parent::label($fieldName, $text, $options);
 	}
 }
