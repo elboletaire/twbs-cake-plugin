@@ -38,7 +38,7 @@ class FormHelper extends Helper\FormHelper
  * {@inheritdoc}
  */
 	// Add btn and btn-default classes to buttons
-	public function button($title, array $options = array())
+	public function button($title, array $options = [])
 	{
 		$options += ['class' => 'btn-default'];
 		if (!isset($options['btnClass']) || (isset($options['btnClass']) && $options['btnClass'])) {
@@ -48,6 +48,42 @@ class FormHelper extends Helper\FormHelper
 		return parent::button($title, $options);
 	}
 
+	public function date($fieldName, array $options = [])
+	{
+		$this->addDatetimeClasses($options, ['year', 'month', 'day']);
+		return parent::date($fieldName, $options);
+	}
+
+	public function datetime($fieldName, array $options = [])
+	{
+		$this->addDatetimeClasses($options);
+		return parent::datetime($fieldName, $options);
+	}
+
+	public function time($fieldName, array $options = [])
+	{
+		$this->addDatetimeClasses($options, ['hour', 'minute']);
+		return parent::time($fieldName, $options);
+	}
+
+/**
+ * {@inheritdoc}
+ */
+	public function __call($method, $params)
+	{
+		if (empty($params)) {
+			throw new Error\Exception(sprintf('Missing field name for FormHelper::%s', $method));
+		}
+		$class = [
+			'class' => 'form-control'
+		];
+		if (isset($params[1])) {
+			$params[1] += $class;
+		} else {
+			$params[1] = $class;
+		}
+		return parent::__call($method, $params);
+	}
 /**
  * {@inheritdoc}
  */
@@ -58,5 +94,21 @@ class FormHelper extends Helper\FormHelper
 			$options = $this->addClass($options, 'form-control');
 		}
 		return parent::_getInput($fieldName, $options);
+	}
+
+	/**
+	 * Adds the .form-control class to every datetime select
+	 *
+	 * @param array $options
+	 */
+	private function addDatetimeClasses(array &$options = [], $periods = ['year', 'month', 'day', 'hour', 'minute'])
+	{
+		$class = ['class' => 'form-control'];
+		foreach ($periods as $period) {
+			if (empty($options[$period])) {
+				$options[$period] = [];
+			}
+			$options[$period] += $class;
+		}
 	}
 }
