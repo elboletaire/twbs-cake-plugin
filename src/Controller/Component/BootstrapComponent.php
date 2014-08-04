@@ -45,18 +45,20 @@ class BootstrapComponent extends Component
  */
 	private function replaceFlashMessage()
 	{
-		if (!$flash = $this->Session->read('Flash.flash')) {
+		if (!$flashes = $this->Session->read('Flash')) {
 			return;
 		}
 
-		if (in_array($flash['element'], array_keys($this->aliases))) {
-			$flash = array_replace_recursive($flash, array(
-				'element' => 'Bootstrap.flash',
-				'params'  => array(
-					'class'  => $this->getFlashClassName($flash['element'])
-				)
-			));
-			$this->Session->write('Flash.flash', $flash);
+		foreach ($flashes as $key => $flash) {
+			if (in_array($flash['element'], array_keys($this->aliases))) {
+				$flash = array_replace_recursive($flash, array(
+					'element' => 'Bootstrap.flash',
+					'params'  => array(
+						'class'  => $this->getFlashClassName($flash['element'])
+					)
+				));
+				$this->Session->write("Flash.{$key}", $flash);
+			}
 		}
 	}
 
