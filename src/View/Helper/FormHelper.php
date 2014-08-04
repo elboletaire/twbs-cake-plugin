@@ -2,6 +2,7 @@
 namespace Bootstrap\View\Helper;
 
 use Cake\Core\App;
+use Cake\Core\Plugin;
 use Cake\View\View;
 use Cake\View\Helper;
 
@@ -23,9 +24,8 @@ class FormHelper extends Helper\FormHelper
 		$config['templateClass'] = 'Bootstrap\View\StringTemplate';
 
 		parent::__construct($View, $config);
-
-		$form_templates = App::path('Config', 'Bootstrap');
-		$form_templates = realpath(array_pop($form_templates) . 'forms.php');
+		$form_templates = Plugin::path('Bootstrap') . 'config' . DS;
+		$form_templates = realpath($form_templates . 'forms.php');
 		$form_templates = function() use ($form_templates) {
 			require $form_templates;
 			return $config;
