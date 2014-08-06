@@ -6,12 +6,6 @@
 table {
   background-color: @table-bg;
 }
-caption {
-  padding-top: @table-cell-padding;
-  padding-bottom: @table-cell-padding;
-  color: @text-muted;
-  text-align: left;
-}
 th {
   text-align: left;
 }
@@ -112,7 +106,10 @@ th {
 
 .table-striped {
   > tbody > tr:nth-child(odd) {
-    background-color: @table-bg-accent;
+    > td,
+    > th {
+      background-color: @table-bg-accent;
+    }
   }
 }
 
@@ -123,7 +120,10 @@ th {
 
 .table-hover {
   > tbody > tr:hover {
-    background-color: @table-bg-hover;
+    > td,
+    > th {
+      background-color: @table-bg-hover;
+    }
   }
 }
 

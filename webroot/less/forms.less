@@ -208,11 +208,11 @@ input[type="month"] {
 .checkbox {
   position: relative;
   display: block;
+  min-height: @line-height-computed; // clear the floating input if there is no label text
   margin-top: 10px;
   margin-bottom: 10px;
 
   label {
-    min-height: @line-height-computed; // Ensure the input doesn't jump when there is no text
     padding-left: 20px;
     margin-bottom: 0;
     font-weight: normal;
@@ -306,13 +306,11 @@ input[type="checkbox"] {
 // Build on `.form-control` with modifier classes to decrease or increase the
 // height and font-size of form controls.
 
-.input-sm,
-.form-group-sm .form-control {
+.input-sm {
   .input-size(@input-height-small; @padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @border-radius-small);
 }
 
-.input-lg,
-.form-group-lg .form-control {
+.input-lg {
   .input-size(@input-height-large; @padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @border-radius-large);
 }
 
@@ -333,7 +331,7 @@ input[type="checkbox"] {
 // Feedback icon (requires .glyphicon classes)
 .form-control-feedback {
   position: absolute;
-  top: 0;
+  top: (@line-height-computed + 5); // Height of the `label` and its margin
   right: 0;
   z-index: 2; // Ensure icon is above input groups
   display: block;
@@ -341,7 +339,6 @@ input[type="checkbox"] {
   height: @input-height-base;
   line-height: @input-height-base;
   text-align: center;
-  pointer-events: none;
 }
 .input-lg + .form-control-feedback {
   width: @input-height-large;
@@ -365,15 +362,10 @@ input[type="checkbox"] {
   .form-control-validation(@state-danger-text; @state-danger-text; @state-danger-bg);
 }
 
-// Reposition feedback icon if input has visible label above
-.has-feedback label {
 
-  & ~ .form-control-feedback {
-     top: (@line-height-computed + 5); // Height of the `label` and its margin
-  }
-  &.sr-only ~ .form-control-feedback {
-     top: 0;
-  }
+// Reposition feedback icon if label is hidden with "screenreader only" state
+.has-feedback label.sr-only ~ .form-control-feedback {
+  top: 0;
 }
 
 
@@ -388,6 +380,7 @@ input[type="checkbox"] {
   margin-bottom: 10px;
   color: lighten(@text-color, 25%); // lighten the text some for contrast
 }
+
 
 
 // Inline forms
@@ -460,7 +453,10 @@ input[type="checkbox"] {
       margin-left: 0;
     }
 
-    // Re-override the feedback icon.
+    // Validation states
+    //
+    // Reposition the icon because it's now within a grid column and columns have
+    // `position: relative;` on them. Also accounts for the grid gutter padding.
     .has-feedback .form-control-feedback {
       top: 0;
     }
@@ -513,6 +509,7 @@ input[type="checkbox"] {
   // Reposition the icon because it's now within a grid column and columns have
   // `position: relative;` on them. Also accounts for the grid gutter padding.
   .has-feedback .form-control-feedback {
+    top: 0;
     right: (@grid-gutter-width / 2);
   }
 
@@ -526,12 +523,18 @@ input[type="checkbox"] {
         padding-top: ((@padding-large-vertical * @line-height-large) + 1);
       }
     }
+    .form-control {
+      &:extend(.input-lg);
+    }
   }
   .form-group-sm {
     @media (min-width: @screen-sm-min) {
       .control-label {
         padding-top: (@padding-small-vertical + 1);
       }
+    }
+    .form-control {
+      &:extend(.input-sm);
     }
   }
 }
