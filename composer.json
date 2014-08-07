@@ -1,6 +1,6 @@
 {
-    "name": "cms/bootstrap",
-    "description": "CakePHP Bootstrap Plugin",
+    "name": "elboletaire/twbs-cake-plugin",
+    "description": "CakePHP Twitter Bootstrap Plugin",
     "type": "cakephp-plugin",
     "keywords": ["cakephp", "bootstrap", "plugin"],
     "require": {

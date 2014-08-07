@@ -30,11 +30,11 @@ As this plugin is not in packagist (yet) you'll need to manually add the reposit
     "repositories": [
         {
             "type": "vcs",
-            "url": "http://gitlab.casajuana.eu/cms/bootstrap.git"
+            "url": "https://github.com/elboletaire/twbs-cake-plugin.git"
         }
     ],
     "require": {
-        "cms/bootstrap": "3.0.*"
+        "elboletaire/twbs-cake-plugin": "3.0.*"
     }
 }
 ```
@@ -48,7 +48,7 @@ composer update
 ### As a git submodule
 
 ```bash
-git submodule add http://gitlab.casajuana.eu/cms/bootstrap.git plugins/Bootstrap
+git submodule add https://github.com/elboletaire/twbs-cake-plugin.git plugins/Bootstrap
 git submodule add https://github.com/oyejorge/less.php.git vendor/oyejorge/less.php
 ```
 
