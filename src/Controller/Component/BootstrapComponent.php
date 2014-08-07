@@ -2,9 +2,7 @@
 namespace Bootstrap\Controller\Component;
 
 use Cake\Event\Event;
-use Cake\Controller;
 use Cake\Controller\Component;
-use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Component\SessionComponent;
 
 /**
