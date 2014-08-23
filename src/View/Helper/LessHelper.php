@@ -5,14 +5,14 @@ use Cake\Core\Plugin;
 use Cake\Log\Log;
 use Cake\View\View;
 use Cake\Routing\Router;
-use App\View\Helper\AppHelper;
+use Cake\View\Helper;
 
 /**
  * Simple helper for using lessc with cakephp
  * @author Òscar Casajuana <elboletaire@underave.net>
  * @version 3.0.0
  */
-class LessHelper extends AppHelper
+class LessHelper extends Helper
 {
 	public $helpers = [
 		'Html'
