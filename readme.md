@@ -1,10 +1,12 @@
-# Twitter Bootstrap plugin for CakePHP 3.X
+Twitter Bootstrap plugin for CakePHP 3.X
+========================================
 
 This plugin includes both [lessjs](http://lesscss.org/#client-side-usage-browser-options) and [less.php](https://github.com/oyejorge/less.php#lessphp) compilers and allows you to easilly deploy applications using twitter bootstrap.
 
 With a component and some helpers it automatically replaces cakePHP's elements like form inputs and flash messages to be displayed with twitter bootstrap.
 
-## Dependencies
+Dependencies
+------------
 
 - [oyejorge/less.php](https://github.com/oyejorge/less.php) version >= 1.7.0
 
@@ -13,15 +15,12 @@ With a component and some helpers it automatically replaces cakePHP's elements l
 - [twbs/bootstrap](https://github.com/twbs/bootstrap): [version 3.2.0 (rev. 2c540b7e330eb2e)](https://github.com/twbs/bootstrap/tree/2c540b7e330eb2e8ecedfd7d62fb603f96ee39db)
 - [less.js](https://github.com/less/less.js): [version 1.7.3](https://raw.githubusercontent.com/less/less.js/master/dist/less-1.7.3.min.js)
 
-## Installation
+Installation
+------------
 
-After adding the plugin remember to load it in the bootstrap file:
+### Adding the plugin
 
-```php
-Plugin::load('Bootstrap');
-```
-
-### Using composer
+#### Using composer
 
 Add this to your `composer.json` file:
 
@@ -50,14 +49,22 @@ And update:
 composer update
 ```
 
-### As a git submodule
+#### As a git submodule
 
 ```bash
 git submodule add https://github.com/elboletaire/twbs-cake-plugin.git plugins/Bootstrap
 git submodule add https://github.com/oyejorge/less.php.git vendor/oyejorge/less.php
 ```
 
-## Configuration
+### Enabling the plugin
+
+After adding the plugin remember to load it in your `config/bootstrap.php` file:
+
+```php
+Plugin::load('Bootstrap');
+```
+
+### Configuration
 
 After adding the plugin you can add the desired utilities:
 
@@ -97,7 +104,8 @@ echo $this->Less->less('styles.less');
 
 And that's it :)
 
-## Utilities
+Utilities
+---------
 
 ### Component
 
