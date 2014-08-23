@@ -46,9 +46,11 @@ branch) you should define it as follows:
 Also, under the `autoload` key, ensure to add the Bootstrap plugin:
 
 ```json
-"psr-4": {
-    // you'll have more things here for sure
-    "Bootstrap\\": "./plugins/Bootstrap/src"
+{
+    "psr-4": {
+        // you'll have more things here for sure
+        "Bootstrap\\": "./plugins/Bootstrap/src"
+    }
 }
 ```
 
