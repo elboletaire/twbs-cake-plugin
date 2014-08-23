@@ -43,9 +43,19 @@ branch) you should define it as follows:
 }
 ```
 
+Also, under the `autoload` key, ensure to add the Bootstrap plugin:
+
+```json
+"psr-4": {
+    // you'll have more things here for sure
+    "Bootstrap\\": "./plugins/Bootstrap/src"
+}
+```
+
 And update:
 
 ```bash
+composer dump-autoload
 composer update
 ```
 
@@ -62,6 +72,13 @@ After adding the plugin remember to load it in your `config/bootstrap.php` file:
 
 ```php
 Plugin::load('Bootstrap');
+```
+
+If, for any reason, the `psr-4` addition to the `composer.json` file does not
+work, try setting `autoload` to `true` when loading the plugin:
+
+```php
+Plugin::load('Bootstrap', ['autoload' => true]);
 ```
 
 ### Configuration
