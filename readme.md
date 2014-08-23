@@ -23,23 +23,28 @@ Plugin::load('Bootstrap');
 
 ### Using composer
 
-As this plugin is not in packagist (yet) you'll need to manually add the repository url to your `composer.json` file:
+Add this to your `composer.json` file:
 
 ```json
 {
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/elboletaire/twbs-cake-plugin.git"
-        }
-    ],
     "require": {
-        "elboletaire/twbs-cake-plugin": "3.0.*"
+        "elboletaire/twbs-cake-plugin": "3.0.0-alpha2"
     }
 }
 ```
 
-And...
+Or, if you preffer the latest version (according to current Cake 3.X master
+branch) you should define it as follows:
+
+```json
+{
+    "require": {
+        "elboletaire/twbs-cake-plugin": "dev-master"
+    }
+}
+```
+
+And update:
 
 ```bash
 composer update
