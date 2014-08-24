@@ -128,12 +128,12 @@ class LessHelper extends Helper
 		// Append the user less files
 		foreach ($less as $les) {
 			$return .= $this->Html->meta('link', null, [
-				'link' => Router::url('/' . $this->less_path . '/' . $les),
-				'rel' => 'stylesheet/less'
+				'link' => '/' . $this->less_path . '/' . $les,
+				'rel'  => 'stylesheet/less'
 			]);
 		}
 		// Less.js configuration
-		$return .= $this->Html->scriptBlock(sprintf('less = %s;', json_encode($options['js'])));
+		$return .= $this->Html->scriptBlock(sprintf('less = %s;', json_encode($options['js'], JSON_UNESCAPED_SLASHES)));
 		// <script> tag for less.js file
 		$return .= $this->Html->script($options['less']);
 
@@ -197,7 +197,10 @@ class LessHelper extends Helper
 			}
 		]);
 		$this->lessjs_defaults = array_merge($this->lessjs_defaults, [
-			'rootpath' => Router::url('/')
+			// None of this options seems to take effect... :_(
+			// 'rootpath'     => preg_replace('@^https?://@', '', Router::url('/', true)),
+			// 'rootpath'     => preg_replace('@^https?:/@', '', Router::url('/', true)),
+			// 'rootpath'     => Router::url('/'),
 		]);
 
 		if (empty($options['parser'])) {
