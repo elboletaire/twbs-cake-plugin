@@ -19,5 +19,10 @@
     },
     "extra": {
     	"installer-name": "Bootstrap"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bootstrap\\": "src"
+        }
     }
 }
