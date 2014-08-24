@@ -20,8 +20,6 @@ Installation
 
 ### Adding the plugin
 
-#### Using composer
-
 You can easily install this plugin using composer as follows:
 
 ```bash
@@ -31,32 +29,6 @@ composer require elboletaire/twbs-cake-plugin
 After doing it, composer will ask you for a version. Checkout the [package on packagist](https://packagist.org/packages/elboletaire/twbs-cake-plugin) to know every available version.
 
 Latest version currently is `3.0.0-beta1`, but you can use `dev-master` to use the latest `master HEAD` version.
-
-After composer ends up installing, you should add this to your `composer.json` file, under the `autoload` key:
-
-```json
-{
-    "autoload": {
-        "psr-4": {
-            // you'll have more things here for sure
-            "Bootstrap\\": "./plugins/Bootstrap/src"
-        }
-    }
-}
-```
-
-And update autoload:
-
-```bash
-composer dump-autoload
-```
-
-#### As a git submodule
-
-```bash
-git submodule add https://github.com/elboletaire/twbs-cake-plugin.git plugins/Bootstrap
-git submodule add https://github.com/oyejorge/less.php.git vendor/oyejorge/less.php
-```
 
 ### Enabling the plugin
 
