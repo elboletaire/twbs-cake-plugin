@@ -12,8 +12,8 @@ Dependencies
 
 ### Included dependencies
 
-- [twbs/bootstrap](https://github.com/twbs/bootstrap): [version 3.2.0 (rev. 2c540b7e330eb2e)](https://github.com/twbs/bootstrap/tree/2c540b7e330eb2e8ecedfd7d62fb603f96ee39db)
-- [less.js](https://github.com/less/less.js): [version 1.7.3](https://raw.githubusercontent.com/less/less.js/master/dist/less-1.7.3.min.js)
+- [twbs/bootstrap](https://github.com/twbs/bootstrap): [version 3.2.0 (rev. 0140198699a41d2)](https://github.com/twbs/bootstrap/tree/0140198699a41d299cd2d100e01c12c967b765e4)
+- [less.js](https://github.com/less/less.js): [version 1.7.4](https://raw.githubusercontent.com/less/less.js/master/dist/less-1.7.4.min.js)
 
 Installation
 ------------
@@ -207,7 +207,15 @@ The elements that automatically have their classes loaded are: inputs, labels an
 
 > \* Buttons always have the `.btn` class added. If you want to remove the class you can pass an additional `btnClass` param set to `false` to the button's `$options`.
 
-## License
+Known Issues
+------------
+
+- If you have an application installed on a subfolder, i.e. `www.example.com/path/to/your/cake/root/` the less.js will not understand relative urls causing it to not found the less files. You have two workarounds for this:
+    + Disable the js parsing and use the php parsing instead.
+    + Set your `@import` rules as absolute while on develop. Taking the `@import` rule from this docs `@import /bootstrap/less/bootstrap.less` you'll need to specify it as follows: `@import /path/to/your/cake/root/bootstrap/less/bootstrap.less`.
+
+License
+-------
 
     Copyright 2013-2014 Òscar Casajuana (a.k.a. elboletaire)
 

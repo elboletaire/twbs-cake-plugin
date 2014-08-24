@@ -27,6 +27,8 @@
 
   Tooltip.VERSION  = '3.2.0'
 
+  Tooltip.TRANSITION_DURATION = 150
+
   Tooltip.DEFAULTS = {
     animation: true,
     placement: 'top',
@@ -207,7 +209,7 @@
       $.support.transition && this.$tip.hasClass('fade') ?
         $tip
           .one('bsTransitionEnd', complete)
-          .emulateTransitionEnd(150) :
+          .emulateTransitionEnd(Tooltip.TRANSITION_DURATION) :
         complete()
     }
   }
@@ -295,7 +297,7 @@
     $.support.transition && this.$tip.hasClass('fade') ?
       $tip
         .one('bsTransitionEnd', complete)
-        .emulateTransitionEnd(150) :
+        .emulateTransitionEnd(Tooltip.TRANSITION_DURATION) :
       complete()
 
     this.hoverState = null
@@ -321,7 +323,7 @@
     var isBody = el.tagName == 'BODY'
     var isSvg  = window.SVGElement && el instanceof window.SVGElement
 
-    var elRect    = el.getBoundingClientRect ? el.getBoundingClientRect() : null
+    var elRect    = el.getBoundingClientRect()
     var elOffset  = isBody ? { top: 0, left: 0 } : $element.offset()
     var scroll    = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() }
     var outerDims = isSvg ? {} : {
