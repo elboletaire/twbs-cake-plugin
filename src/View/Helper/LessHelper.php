@@ -197,7 +197,8 @@ class LessHelper extends Helper
 			}
 		]);
 		$this->lessjs_defaults = array_merge($this->lessjs_defaults, [
-			// None of this options seems to take effect... :_(
+			// None of these options seems to take effect... :_(
+			// 'rootpath'     => preg_replace('@^https?://@', ':/', Router::url('/', true)),
 			// 'rootpath'     => preg_replace('@^https?://@', '', Router::url('/', true)),
 			// 'rootpath'     => preg_replace('@^https?:/@', '', Router::url('/', true)),
 			// 'rootpath'     => Router::url('/'),

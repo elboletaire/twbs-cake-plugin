@@ -14,7 +14,7 @@ use Cake\Routing\Router;
         echo $this->fetch('meta');
 
         // Styles
-        echo $this->Less->less('styles.less', ['js' => ['env' => 'development']]);
+        echo $this->Less->less('styles.less');
         echo $this->fetch('css');
 
         // Sometime we'll want to send scripts to the top (rarely..)
@@ -31,7 +31,7 @@ use Cake\Routing\Router;
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?= Router::url('/') ?>">CMS</a>
+                <a class="navbar-brand" href="<?= Router::url('/') ?>">Twitter Bootstrap</a>
             </div>
             <nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -55,9 +55,6 @@ use Cake\Routing\Router;
 
             <?= $this->fetch('content'); ?>
         </div>
-        <footer class="navbar navbar-inverse navbar-fixed-bottom">
-            <p class="navbar-text">proudly created by ÒCA a.k.a. elboletaire</p>
-        </footer>
     </div>
     <?= $this->Html->script([
         'http://code.jquery.com/jquery-2.1.1.min.js',
