@@ -1,5 +1,13 @@
 {
     "name": "elboletaire/twbs-cake-plugin",
+    "authors": [
+        {
+            "name": "Òscar Casajuana",
+            "email": "elboletaire@underave.net",
+            "homepage": "http://racotecnic.com",
+            "role": "Developer"
+        }
+    ],
     "description": "CakePHP Twitter Bootstrap Plugin",
     "type": "cakephp-plugin",
     "keywords": ["cakephp", "bootstrap", "plugin"],
