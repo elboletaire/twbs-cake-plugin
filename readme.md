@@ -22,43 +22,33 @@ Installation
 
 #### Using composer
 
-Add this to your `composer.json` file:
+You can easily install this plugin using composer as follows:
+
+```bash
+composer require elboletaire/twbs-cake-plugin
+```
+
+After doing it, composer will ask you for a version. Checkout the [package on packagist](https://packagist.org/packages/elboletaire/twbs-cake-plugin) to know every available version.
+
+Latest version currently is `3.0.0-beta1`, but you can use `dev-master` to use the latest `master HEAD` version.
+
+After composer ends up installing, you should add this to your `composer.json` file, under the `autoload` key:
 
 ```json
 {
-    "require": {
-        "elboletaire/twbs-cake-plugin": "3.0.0-alpha2"
+    "autoload": {
+        "psr-4": {
+            // you'll have more things here for sure
+            "Bootstrap\\": "./plugins/Bootstrap/src"
+        }
     }
 }
 ```
 
-Or, if you preffer the latest version (according to current Cake 3.X master
-branch) you should define it as follows:
-
-```json
-{
-    "require": {
-        "elboletaire/twbs-cake-plugin": "dev-master"
-    }
-}
-```
-
-Also, under the `autoload` key, ensure to add the Bootstrap plugin:
-
-```json
-{
-    "psr-4": {
-        // you'll have more things here for sure
-        "Bootstrap\\": "./plugins/Bootstrap/src"
-    }
-}
-```
-
-And update:
+And update autoload:
 
 ```bash
 composer dump-autoload
-composer update
 ```
 
 #### As a git submodule
