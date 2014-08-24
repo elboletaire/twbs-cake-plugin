@@ -97,7 +97,7 @@ Next, **create a `styles.less`** file on your `webroot/less` folder (also create
 
 Finally, you can use the template included with this plugin as a theme (for previewing):
 
-```
+```php
 // AppController
 public function beforeFilter(Event $event)
 {
