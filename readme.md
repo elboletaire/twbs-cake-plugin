@@ -1,9 +1,16 @@
 Twitter Bootstrap plugin for CakePHP 3.X
 ========================================
 
-This plugin includes both [lessjs](http://lesscss.org/#client-side-usage-browser-options) and [less.php](https://github.com/oyejorge/less.php#lessphp) compilers and allows you to easilly deploy applications using twitter bootstrap.
+This plugin includes both
+[lessjs](http://lesscss.org/#client-side-usage-browser-options) and
+[less.php](https://github.com/oyejorge/less.php#lessphp) compilers and allows
+you to easilly deploy applications using twitter bootstrap.
 
-With a component and some helpers it automatically replaces cakePHP's elements like form inputs and flash messages to be displayed with twitter bootstrap.
+With a component and some helpers it automatically replaces cakePHP's elements
+like form inputs and flash messages to be displayed with twitter bootstrap.
+
+It also contains bake templates that will help you starting *twitter-bootstraped*
+webapps.
 
 Dependencies
 ------------
@@ -12,8 +19,10 @@ Dependencies
 
 ### Included dependencies
 
-- [twbs/bootstrap](https://github.com/twbs/bootstrap): [version 3.2.0 (rev. 0140198699a41d2)](https://github.com/twbs/bootstrap/tree/0140198699a41d299cd2d100e01c12c967b765e4)
-- [less.js](https://github.com/less/less.js): [version 1.7.4](https://raw.githubusercontent.com/less/less.js/master/dist/less-1.7.4.min.js)
+- [twbs/bootstrap](https://github.com/twbs/bootstrap):
+  [version 3.2.0 (rev. 0140198699a41d2)](https://github.com/twbs/bootstrap/tree/0140198699a41d299cd2d100e01c12c967b765e4)
+- [less.js](https://github.com/less/less.js):
+  [version 1.7.4](https://raw.githubusercontent.com/less/less.js/master/dist/less-1.7.4.min.js)
 
 Installation
 ------------
@@ -26,9 +35,12 @@ You can easily install this plugin using composer as follows:
 composer require elboletaire/twbs-cake-plugin
 ```
 
-After doing it, composer will ask you for a version. Checkout the [package on packagist](https://packagist.org/packages/elboletaire/twbs-cake-plugin) to know every available version.
+After doing it, composer will ask you for a version. Checkout the
+[package on packagist](https://packagist.org/packages/elboletaire/twbs-cake-plugin)
+to know every available version.
 
-Latest version currently is `3.0.0-beta1`, but you can use `dev-master` to use the latest `master HEAD` version.
+Latest version currently is `3.0.0-beta1`, but you can use `dev-master` to use
+the latest `master HEAD` version.
 
 ### Enabling the plugin
 
@@ -61,13 +73,15 @@ public $helpers = [
 ];
 ```
 
-Next, **create a `styles.less`** file on your `webroot/less` folder (also create that folder!) containing this line:
+Next, **create a `styles.less`** file on your `webroot/less` folder (also create
+that folder!) containing this line:
 
 ```less
 @import '/bootstrap/less/bootstrap.less';
 ```
 
-Finally, you can use the template included with this plugin as a theme (for previewing):
+Finally, you can use the template included with this plugin as a theme (for
+previewing):
 
 ```php
 // AppController
@@ -77,7 +91,8 @@ public function beforeFilter(Event $event)
 }
 ```
 
-But I suppose you want your custom template. To do so, simply use the [LessHelper](#lesshelper):
+But I suppose you want your custom template. To do so, simply use the
+[LessHelper](#lesshelper):
 
 ```php
 echo $this->Less->less('styles.less');
@@ -85,12 +100,24 @@ echo $this->Less->less('styles.less');
 
 And that's it :)
 
+Baking views
+------------
+
+You can bake your views using the twitter bootstrap templates bundled with this
+plugin. To do so, simply specify the `bootstrap` template when baking your files:
+
+```bash
+cake bake all articles --template bootstrap
+```
+
 Utilities
 ---------
 
 ### Component
 
-The **BootstrapComponent** replaces all flash messages (from session key `Flash.Flash`) to automatically load the bootstrap flash message template located at `src/Template/Element/flash.ctp`.
+The **BootstrapComponent** replaces all flash messages (from session key
+`Flash.Flash`) to automatically load the bootstrap flash message template
+located at `src/Template/Element/flash.ctp`.
 
 ### Helpers
 
@@ -98,11 +125,15 @@ The **BootstrapComponent** replaces all flash messages (from session key `Flash.
 
 Used on your template or view to load the compressed CSS.
 
-By default it will compress files using the php parser with cache enabled. This will fill your css folder with a bunch of files starting with `lessphp_` used for the cache. I recommend you adding these files to your `.gitignore` file in order to prevent commiting them:
+By default it will compress files using the php parser with cache enabled.
+This will fill your css folder with a bunch of files starting with `lessphp_`
+used for the cache. I recommend you adding these files to your `.gitignore` file
+in order to prevent commiting them:
 
     lessphp_*
 
-Basically, you give the helper a less file to be loaded (from `/less` directory) and it returns the html link tag to the compiled CSS:
+Basically, you give the helper a less file to be loaded (from `/less` directory)
+and it returns the html link tag to the compiled CSS:
 
 ```php
 echo $this->Less->less('styles.less');
@@ -132,21 +163,30 @@ echo $this->Less->less('styles.less', [
 ]);
 ```
 
-If you want to use the less.js parser directly, instead of a fallback, or you want to use the [#!watch](http://lesscss.org/usage/#using-less-in-the-browser-watch-mode) method, you can do it so by setting the js parser to development:
+If you want to use the less.js parser directly, instead of a fallback, or you
+want to use the
+[#!watch](http://lesscss.org/usage/#using-less-in-the-browser-watch-mode) method,
+you can do it so by setting the js parser to development:
 
 ```php
 echo $this->Less->less('styles.less', ['js' => ['env' => 'development']]);
 ```
 
-This will output all the links to the less files and the needed js files to parse the content only using the less.js parser.
+This will output all the links to the less files and the needed js files to
+parse the content only using the less.js parser.
 
 ##### LessHelper Options
 
-Beside the options for [lessjs](http://lesscss.org/#client-side-usage-browser-options) and [less.php](https://github.com/oyejorge/less.php#lessphp) parsers you can set three options to the helper:
+Beside the options for
+[lessjs](http://lesscss.org/#client-side-usage-browser-options) and
+[less.php](https://github.com/oyejorge/less.php#lessphp) parsers you can set
+three options to the helper:
 
-+ `cache`: default's to true. If disabled, the output will be raw css wrapped with `<style>` tags.
++ `cache`: default's to true. If disabled, the output will be raw css wrapped
+  with `<style>` tags.
 + `tag`: default's to true. Whether or not return the code with its proper tag.
-+ `less`: default's to `/bootstrap/js/less.min`. You can use this var to set a custom lessjs file.
++ `less`: default's to `/bootstrap/js/less.min`. You can use this var to set a
+  custom lessjs file.
 
 ```php
 // Get the link to the resulting file after compressing
@@ -163,18 +203,29 @@ $compiled_css = $this->Less->less('styles.less', [
 
 #### FormHelper
 
-Automatically adds some css classes to your form elements. Some of the input replacements can be found at `src/Config/forms.php`, but many need to be done directly from the FormHelper.
+Automatically adds some css classes to your form elements. Some of the input
+replacements can be found at `src/Config/forms.php`, but many need to be done
+directly from the FormHelper.
 
-The elements that automatically have their classes loaded are: inputs, labels and buttons*.
+The elements that automatically have their classes loaded are: inputs, labels
+and buttons*.
 
-> \* Buttons always have the `.btn` class added. If you want to remove the class you can pass an additional `btnClass` param set to `false` to the button's `$options`.
+> \* Buttons always have the `.btn` class added. If you want to remove the class
+you can pass an additional `btnClass` param set to `false` to the button's
+`$options`.
 
 Known Issues
 ------------
 
-- If you have an application installed on a subfolder, i.e. `www.example.com/path/to/your/cake/root/` the less.js will not understand relative urls causing it to not found the less files. You have two workarounds for this:
+- If you have an application installed on a subfolder, i.e.
+  `www.example.com/path/to/your/cake/root/` the less.js will not understand
+  relative urls causing it to not found the less files. You have two workarounds
+  for this:
     + Disable the js parsing and use the php parsing instead.
-    + Set your `@import` rules as absolute while on develop. Taking the `@import` rule from this docs `@import /bootstrap/less/bootstrap.less` you'll need to specify it as follows: `@import /path/to/your/cake/root/bootstrap/less/bootstrap.less`.
+    + Set your `@import` rules as absolute while on develop. Taking the `@import`
+      rule from this docs `@import /bootstrap/less/bootstrap.less` you'll need
+      to specify it as follows:
+      `@import /path/to/your/cake/root/bootstrap/less/bootstrap.less`.
 
 License
 -------
