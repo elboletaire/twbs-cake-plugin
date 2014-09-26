@@ -22,7 +22,7 @@ Dependencies
 - [twbs/bootstrap](https://github.com/twbs/bootstrap):
   [version 3.2.0 (rev. 0140198699a41d2)](https://github.com/twbs/bootstrap/tree/0140198699a41d299cd2d100e01c12c967b765e4)
 - [less.js](https://github.com/less/less.js):
-  [version 1.7.4](https://raw.githubusercontent.com/less/less.js/master/dist/less-1.7.4.min.js)
+  [version 1.7.5](https://raw.githubusercontent.com/less/less.js/master/dist/less-1.7.5.min.js)
 
 Installation
 ------------
