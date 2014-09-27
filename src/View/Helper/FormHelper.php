@@ -20,10 +20,19 @@ class FormHelper extends Helper\FormHelper
 	// Load custom templates
 	public function __construct(View $View, array $config = [])
 	{
+		// Merge parent FormHelper defaults with this FormHelper ones
+		$this->_defaultConfig = array_merge([
+			'input_class'     => 'form-control',
+			'button_class'    => 'btn-default',
+			'force_class_btn' => true // after enabled can be disabled on runtime,
+									  // passing `'btnClass' => false`
+		], $this->_defaultConfig);
+
 		// Force templateClass
 		$config['templateClass'] = 'Bootstrap\View\StringTemplate';
 
 		parent::__construct($View, $config);
+
 		$form_templates = Plugin::path('Bootstrap') . 'config' . DS;
 		$form_templates = realpath($form_templates . 'forms.php');
 		$form_templates = function() use ($form_templates) {
@@ -36,13 +45,18 @@ class FormHelper extends Helper\FormHelper
 
 /**
  * {@inheritdoc}
+ *
+ * Add .btn and .btn-default classes to buttons
+ *
+ * @var string $title
+ * @var array  $options
  */
-	// Add btn and btn-default classes to buttons
 	public function button($title, array $options = [])
 	{
-		$options += ['class' => 'btn-default'];
-		if (!isset($options['btnClass']) || (isset($options['btnClass']) && $options['btnClass'])) {
-			// always add .btn class
+		$options += ['class' => $this->config('button_class')];
+		$is_btn_enabled = !isset($options['btnClass']) || (isset($options['btnClass']) && $options['btnClass']);
+		// always add .btn class
+		if ($this->config('force_class_btn') && $is_btn_enabled) {
 			$options = $this->addClass($options, 'btn');
 		}
 		return parent::button($title, $options);
@@ -75,7 +89,7 @@ class FormHelper extends Helper\FormHelper
 			throw new Error\Exception(sprintf('Missing field name for FormHelper::%s', $method));
 		}
 		$class = [
-			'class' => 'form-control'
+			'class' => $this->config('input_class')
 		];
 		if (isset($params[1])) {
 			$params[1] += $class;
@@ -91,7 +105,9 @@ class FormHelper extends Helper\FormHelper
 	protected function _getInput($fieldName, $options)
 	{
 		if (in_array($options['type'], array('select', 'url', 'text', 'textarea'))) {
-			$options = $this->addClass($options, 'form-control');
+			foreach (explode(' ', $this->config('input_class')) as $class) {
+				$options = $this->addClass($options, $class);
+			}
 		}
 		return parent::_getInput($fieldName, $options);
 	}
@@ -103,7 +119,7 @@ class FormHelper extends Helper\FormHelper
 	 */
 	private function addDatetimeClasses(array &$options = [], $periods = ['year', 'month', 'day', 'hour', 'minute'])
 	{
-		$class = ['class' => 'form-control'];
+		$class = ['class' => $this->config('input_class')];
 		foreach ($periods as $period) {
 			if (empty($options[$period])) {
 				$options[$period] = [];

@@ -61,7 +61,7 @@ class BootstrapComponent extends Component
 	}
 
 /**
- * Returns the flash class name depending on it's alias
+ * Returns the flash class name depending on its alias
  *
  * @param  string $name The alias name.
  * @return string       Equivalent class name. If it does not exist will return $name.
