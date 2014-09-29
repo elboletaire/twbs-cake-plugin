@@ -8,7 +8,7 @@
             "role": "Developer"
         }
     ],
-    "description": "Twitter Bootstrap CakePHP Plugin with bundled less.php parser, helper and bake templates",
+    "description": "Twitter Bootstrap Plugin for CakePHP 3 with bundled less.php parser, helper and bake templates",
     "type": "cakephp-plugin",
     "keywords": ["cakephp", "bootstrap", "plugin"],
     "license": "Apache-2.0",
