@@ -15,7 +15,7 @@
     "require": {
         "php": ">=5.4.19",
         "composer/installers": "*",
-        "oyejorge/less.php": "1.7.*"
+        "oyejorge/less.php": "1.7.0.2"
     },
     "extra": {
     	"installer-name": "Bootstrap"

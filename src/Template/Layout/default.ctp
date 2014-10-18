@@ -14,7 +14,7 @@ use Cake\Routing\Router;
         echo $this->fetch('meta');
 
         // Styles
-        echo $this->Less->less('styles.less');
+        echo $this->Less->less('Bootstrap.less/bootstrap.less', ['js' => ['env' => 'development']]);
         echo $this->fetch('css');
 
         // Sometime we'll want to send scripts to the top (rarely..)
