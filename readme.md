@@ -3,14 +3,14 @@ Twitter Bootstrap plugin for CakePHP 3.X
 
 This plugin includes both
 [lessjs](http://lesscss.org/#client-side-usage-browser-options) and
-[less.php](https://github.com/oyejorge/less.php#lessphp) compilers and allows
-you to easilly deploy applications using twitter bootstrap.
+[less.php](https://github.com/oyejorge/less.php#lessphp) parsers and allows
+you to easilly deploy CakePHP applications with twitter bootstrap.
 
 With a component and some helpers it automatically replaces cakePHP's elements
 like form inputs and flash messages to be displayed with twitter bootstrap.
 
 It also contains bake templates that will help you starting *twitter-bootstraped*
-webapps.
+CakePHP webapps.
 
 Installation
 ------------
@@ -27,7 +27,7 @@ After doing it, composer will ask you for a version. Checkout the
 [package on packagist](https://packagist.org/packages/elboletaire/twbs-cake-plugin)
 to know every available version.
 
-Latest version currently is `3.0.0-beta1`, but you can use `dev-master` to use
+Latest version currently is `3.0.0-beta2`, but you can use `dev-master` to use
 the latest `master HEAD` version.
 
 ### Enabling the plugin
