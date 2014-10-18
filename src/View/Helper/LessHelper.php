@@ -1,4 +1,10 @@
 <?php
+/**
+ * Helper for using less.php with cakephp
+ *
+ * @author Òscar Casajuana <elboletaire@underave.net>
+ * @version 3.0.1
+ */
 namespace Bootstrap\View\Helper;
 
 use Cake\Core\Plugin;
@@ -7,11 +13,6 @@ use Cake\View\View;
 use Cake\Routing\Router;
 use Cake\View\Helper;
 
-/**
- * Simple helper for using lessc with cakephp
- * @author Òscar Casajuana <elboletaire@underave.net>
- * @version 3.0.0
- */
 class LessHelper extends Helper
 {
 	public $helpers = [

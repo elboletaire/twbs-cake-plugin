@@ -12,6 +12,15 @@ like form inputs and flash messages to be displayed with twitter bootstrap.
 It also contains bake templates that will help you starting *twitter-bootstraped*
 CakePHP webapps.
 
+General Features
+----------------
+
+- Parses less files using less.js or less.php.
+- LessHelper to easily parse files.
+- FormHelper to automatically style forms.
+- FlashComponent to replace alerts.
+- Bake templates.
+
 Installation
 ------------
 
@@ -52,12 +61,11 @@ After adding the plugin you can add the desired utilities:
 ```php
 // AppController.php
 public $helpers = [
-    'Bootstrap.Less', // Parses .less files
-    'Bootstrap.Form'  // Generates twitter bootstrap forms
+    'Bootstrap.Less',
+    'Bootstrap.Form'
 ];
 
 public function initialize() {
-    // Replaces flash messages (TODO: Extend FlashComponent)
     $this->loadComponent('Bootstrap.Bootstrap');
 }
 ```
@@ -116,15 +124,20 @@ cake bake all articles --template bootstrap
 Utilities
 ---------
 
-### Component
+### FlashComponent
 
-The **BootstrapComponent** replaces all flash messages (from session key
-`Flash.Flash`) to automatically load the bootstrap flash message template
-located at `src/Template/Element/flash.ctp`.
+The **FlashComponent** replaces all flash messages set with `$this->Flash` to
+automatically load the bootstrap flash message template located at
+`src/Template/Element/flash.ctp`.
 
-### Helpers
+By default the flash messages will show a close button. If you want to disable
+just specify it as param when setting the flash message:
 
-#### LessHelper
+```php
+$this->Flash->danger('Fatal error', ['params' => ['close' => false]]);
+```
+
+### LessHelper
 
 Used on your template or view to load the compressed CSS.
 
@@ -178,7 +191,7 @@ echo $this->Less->less('less/styles.less', ['js' => ['env' => 'development']]);
 This will output all the links to the less files and the needed js files to
 parse the content only using the less.js parser.
 
-##### LessHelper Options
+#### LessHelper Options
 
 Beside the options for
 [lessjs](http://lesscss.org/#client-side-usage-browser-options) and
@@ -216,7 +229,7 @@ echo $this->Less->less('less/styles.less', [
 ]);
 ```
 
-#### FormHelper
+### FormHelper
 
 Automatically adds some CSS classes to your form elements. Some of the input
 replacements can be found at `src/Config/forms.php`, but many need to be done
