@@ -36,7 +36,7 @@ After doing it, composer will ask you for a version. Checkout the
 [package on packagist](https://packagist.org/packages/elboletaire/twbs-cake-plugin)
 to know every available version.
 
-Latest version currently is `3.0.0-beta2`, but you can use `dev-master` to use
+Latest version currently is `3.0.0-beta3`, but you can use `dev-master` to use
 the latest `master HEAD` version.
 
 ### Enabling the plugin
@@ -66,7 +66,7 @@ public $helpers = [
 ];
 
 public function initialize() {
-    $this->loadComponent('Bootstrap.Bootstrap');
+    $this->loadComponent('Bootstrap.Flash');
 }
 ```
 
