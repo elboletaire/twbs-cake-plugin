@@ -32,9 +32,6 @@ class FormHelper extends Helper\FormHelper
 									  // passing `'btnClass' => false`
 		], $this->_defaultConfig);
 
-		// Force templateClass
-		$config['templateClass'] = 'Bootstrap\View\StringTemplate';
-
 		parent::__construct($View, $config);
 
 		$form_templates = Plugin::path('Bootstrap') . 'config' . DS;
