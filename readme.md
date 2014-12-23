@@ -70,6 +70,9 @@ public function initialize() {
 }
 ```
 
+Usage
+-----
+
 Next, **create a `styles.less`** file on your `webroot/less` folder (also create
 that folder!) containing this line:
 
@@ -77,8 +80,16 @@ that folder!) containing this line:
 @import '/bootstrap/less/bootstrap.less';
 ```
 
-Finally, you can use the template included with this plugin as a theme (for
-previewing, as it's not functional):
+Finally, load the less file from your view or layout:
+
+```php
+echo $this->Less->less('styles.less');
+```
+
+### Templates
+
+You can use the template included with this plugin as a theme (right now there's
+only the `default` template):
 
 ```php
 // AppController
@@ -91,23 +102,20 @@ public $layout = 'Bootstrap.default';
 You can also specify it as a layout directly from your template files:
 
 ```php
-<?php
-// any .ctp template file
+// any .ctp Template file
 $this->layout = 'Bootstrap.default';
-?>
 ```
+
+Last but not least, you can also copy that template to your `Template/Layout`
+folder and then extend the template from your view.
+
+[Read more about views on the CakePHP Cookbook](http://book.cakephp.org/3.0/en/views.html)
+
 
 Take in mind that if you're loading this plugin in a fresh CakePHP installation
 and you try to see the layout change in the home page, you won't see nothing.
 The `home.ctp` overwrites the layout to `false`, to ensure it's loaded as it has
 been designed.
-
-> To load less files on your templates use the [LessHelper](#lesshelper):
-On your template, replace your CSS link (probably `$this->Html->css()`) line
-with this one:
-```php
-echo $this->Less->less('less/styles.less');
-```
 
 And that's it :)
 
