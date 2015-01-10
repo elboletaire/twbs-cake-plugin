@@ -47,9 +47,8 @@ class FlashComponent extends Component\FlashComponent
         if (array_key_exists($flash['element'], $this->aliases) || in_array(str_replace('Flash/', null, $flash['element']), $this->aliases)) {
             $flash = array_replace_recursive($flash, array(
                 'element' => 'Bootstrap.flash',
-                'params'  => array(
-                    'class'  => $this->getFlashClassName($flash['element'])
-                )
+                'class'  => $this->getFlashClassName($flash['element'])
+
             ));
             $this->_session->write("Flash.{$options['key']}", $flash);
         }

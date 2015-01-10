@@ -79,7 +79,7 @@ $this->prepend('script', $this->Html->script([
     </header>
     <div class="container">
         <div id="content">
-            <?= $this->Session->flash(); ?>
+            <?= $this->Flash->render(); ?>
             <?= $this->fetch('content'); ?>
         </div>
     </div>
