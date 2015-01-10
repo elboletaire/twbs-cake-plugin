@@ -31,7 +31,8 @@ $this->prepend('script', $this->Html->script([
     '//code.jquery.com/jquery-2.1.1.min.js',
     '/bootstrap/js/transition',
     '/bootstrap/js/collapse',
-    '/bootstrap/js/dropdown'
+    '/bootstrap/js/dropdown',
+    '/bootstrap/js/alert'
 ]));
 
 ?>
