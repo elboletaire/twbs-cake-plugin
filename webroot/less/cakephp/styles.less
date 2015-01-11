@@ -1,0 +1,71 @@
+@import 'bootstrap.less';
+
+// Set all tables as .table.table-striped
+table {
+    &:extend(.table all, .table-striped all);
+}
+
+// Set the .side-nav to be a .nav-stacked.nav-pills
+.side-nav {
+    &:extend(.nav all, .nav-pills all, .nav-stacked all);
+}
+
+.columns:extend(.clearfix all) {
+
+    .view & {
+        border-radius: @border-radius-small;
+    }
+
+    .view .texts & {
+        border-bottom: 1px solid @gray-lighter;
+    }
+
+    &.strings {
+        .box-shadow(1px 2px 4px fade(black, 24%));
+    }
+
+    &.numbers, &.dates, &.booleans {
+        p {
+            color: white;
+        }
+    }
+
+    &.numbers {
+        background-color: lighten(@brand-info, 20%);
+    }
+
+    &.dates {
+        background-color: lighten(@brand-success, 25%);
+    }
+
+    &.booleans {
+        background-color: lighten(@brand-danger, 25%);
+    }
+
+    &.end {
+        margin-top: 15px;
+        @media (min-width: @screen-lg-min) {
+            margin-top  : 0;
+            margin-left : 15px;
+        }
+    }
+
+    &.actions {
+        border-left: 5px solid @brand-primary;
+    }
+}
+
+.view {
+    .strings p {
+        &:extend(.view .texts .columns);
+    }
+}
+
+// Style action links
+table .actions a {
+    &:extend(.btn all, .btn-default all, .btn-xs);
+    // Put delete buttons in red
+    &[onclick][href='#'] {
+        &:extend(.btn-danger all);
+    }
+}

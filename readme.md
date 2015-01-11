@@ -73,23 +73,25 @@ public function initialize() {
 Usage
 -----
 
-Next, **create a `styles.less`** file on your `webroot/less` folder (also create
-that folder!) containing this line:
+There are two common usage ways when using twitter bootstrap and less:
 
-```less
-@import '/bootstrap/less/bootstrap.less';
-```
+- Directly using twitter bootstrap classes on your views.
+- Using custom classes on your views and then extending that classes to twitter
+  bootstrap components.
 
-Finally, load the less file from your view or layout:
+For the first case you can directly [load the layout included](#themes) with
+this plugin and [bake your views](#baking-views) with the also included bake
+templates.
 
-```php
-echo $this->Less->less('styles.less');
-```
+For the second case you'll need to
+[create your own layout](#creating-your-own-layout) and load the included
+`webroot/less/cakephp/styles.less` file. It will extend the default baked views'
+styles so they have a twitter bootstrap look and feel.
 
-### Templates
+### Themes
 
-You can use the template included with this plugin as a theme (right now there's
-only the `default` template):
+On both cases you can use the layout included with this plugin as a theme
+(right now there's only the `default` layout):
 
 ```php
 // AppController
@@ -111,23 +113,45 @@ folder and then extend the template from your view.
 
 [Read more about views on the CakePHP Cookbook](http://book.cakephp.org/3.0/en/views.html)
 
+> BTW it's recommended that you copy all the required files to your src folder
+(specially for assets), even if you won't modify them.
 
 Take in mind that if you're loading this plugin in a fresh CakePHP installation
 and you try to see the layout change in the home page, you won't see nothing.
 The `home.ctp` overwrites the layout to `false`, to ensure it's loaded as it has
 been designed.
 
-And that's it :)
-
-Baking views
-------------
+### Baking views
 
 You can bake your views using the twitter bootstrap templates bundled with this
 plugin. To do so, simply specify the `bootstrap` template when baking your files:
 
 ```bash
-cake bake all articles --template bootstrap
+cake bake all articles --theme Bootstrap
 ```
+
+### Creating your own layout
+
+Create a `styles.less` file on your `webroot/less` folder (also create
+that folder if it does not exist) containing this line:
+
+```less
+@import '/bootstrap/less/bootstrap.less';
+```
+
+Finally, load the less file from your view or layout:
+
+```php
+echo $this->Less->less('styles.less');
+```
+
+If you want to extend twitter bootstrap styles I recommend you to copy both
+`bootstrap.less` and `variables.less` files to your `less` folder and customize
+them to your needs.
+
+If you'd like to see an example of this you can check the files included in
+`webroot/less/cakephp` specially made to extend the default CakePHP baked
+templates.
 
 Utilities
 ---------
