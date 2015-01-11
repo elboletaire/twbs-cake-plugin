@@ -55,7 +55,7 @@ $this->prepend('script', $this->Html->script([
         ]);
         echo $this->fetch('css');
 
-        // Sometime we'll want to send scripts to the top (rarely..)
+        // Sometimes we'll want to send scripts to the top (rarely..)
         echo $this->fetch('script.top');
     ?>
 </head>
@@ -83,7 +83,7 @@ $this->prepend('script', $this->Html->script([
         </div>
     </header>
     <div class="container">
-        <div id="content">
+        <div id="content" class="row">
             <?= $this->Flash->render(); ?>
             <?= $this->fetch('content'); ?>
         </div>
