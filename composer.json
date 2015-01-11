@@ -14,11 +14,11 @@
     "license": "Apache-2.0",
     "require": {
         "php": ">=5.4.19",
-        "composer/installers": "*",
-        "oyejorge/less.php": "1.7.0.2"
+        "cakephp/plugin-installer": "*",
+        "elboletaire/less-cake-plugin": "*"
     },
     "extra": {
-    	"installer-name": "Bootstrap"
+        "installer-name": "Bootstrap"
     },
     "autoload": {
         "psr-4": {
