@@ -19,6 +19,7 @@ elseif ($this->fetch('title') && Configure::read('App.title')) {
 
 // Prepend some meta tags
 $this->prepend('meta', $this->Html->meta('icon'));
+$this->prepend('meta', $this->Html->meta('viewport', 'width=device-width, initial-scale=1'));
 if (Configure::read('App.author')) {
     $this->prepend('meta', $this->Html->meta('author', null, [
         'name'    => 'author',
@@ -48,7 +49,10 @@ $this->prepend('script', $this->Html->script([
         echo $this->fetch('meta');
 
         // Styles
-        echo $this->Less->less('Bootstrap.less/bootstrap.less');
+        echo $this->Less->less([
+            'Bootstrap.less/bootstrap.less'
+            // 'Bootstrap.less/cakephp/styles.less'
+        ]);
         echo $this->fetch('css');
 
         // Sometime we'll want to send scripts to the top (rarely..)
