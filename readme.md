@@ -193,7 +193,7 @@ you can pass an additional `btnClass` param set to `false` to the button's
 Dependencies
 ------------
 
-- [oyejorge/less.php](https://github.com/oyejorge/less.php) version >= 1.7.0.2
+- [elboletaire/less-cake-plugin](https://github.com/elboletaire/less-cake-plugin) version >= 1.0.0
 
 ### Included dependencies
 
