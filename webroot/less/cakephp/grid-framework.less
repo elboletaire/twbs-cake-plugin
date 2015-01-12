@@ -5,7 +5,7 @@
 
 .make-grid-columns() {
   // Common styles for all sizes of grid columns, widths 1-12
-  .col(@index) when (@index = 1) { // initial
+  .col(@index) { // initial
     @item: ~".xsmall-@{index}, .small-@{index}, .medium-@{index}, .large-@{index}";
     .col((@index + 1), @item);
   }
@@ -27,7 +27,7 @@
 }
 
 .float-grid-columns(@class) {
-  .col(@index) when (@index = 1) { // initial
+  .col(@index) { // initial
     @item: ~".@{class}-@{index}";
     .col((@index + 1), @item);
   }
