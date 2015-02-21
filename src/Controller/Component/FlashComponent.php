@@ -4,8 +4,8 @@
  * as twitter bootstrap alerts
  *
  * @author  Òscar Casajuana <elboletaire@underave.net>
- * @license Apache-2.0
- * @copyright Òscar Casajuana 2014
+ * @license MIT
+ * @copyright Òscar Casajuana 2013-2015
  */
 namespace Bootstrap\Controller\Component;
 

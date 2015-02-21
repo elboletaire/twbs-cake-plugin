@@ -11,7 +11,7 @@
     "description": "Twitter Bootstrap Plugin for CakePHP 3 with bundled less.php parser, helper and bake templates",
     "type": "cakephp-plugin",
     "keywords": ["cakephp", "bootstrap", "plugin"],
-    "license": "Apache-2.0",
+    "license": "MIT",
     "require": {
         "php": ">=5.4.19",
         "cakephp/plugin-installer": "*",

@@ -3,7 +3,8 @@
  * FormHelper replacement to add Twitter Bootstrap classes to cakePHP forms
  *
  * @author Òscar Casajuana <elboletaire@underave.net>
- * @version 3.0.0
+ * @license MIT
+ * @copyright Òscar Casajuana 2013-2015
  */
 namespace Bootstrap\View\Helper;
 
