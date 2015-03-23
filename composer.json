@@ -8,14 +8,14 @@
             "role": "Developer"
         }
     ],
-    "description": "Twitter Bootstrap Plugin for CakePHP 3 with bundled less.php parser, helper and bake templates",
+    "description": "Twitter Bootstrap Plugin for CakePHP 3 with bundled less.php and less.js parsers, helpers and bake templates",
     "type": "cakephp-plugin",
     "keywords": ["cakephp", "bootstrap", "plugin"],
     "license": "MIT",
     "require": {
         "php": ">=5.4.19",
-        "cakephp/plugin-installer": "*",
-        "elboletaire/less-cake-plugin": "*"
+        "cakephp/cakephp": ">=3.0.0",
+        "elboletaire/less-cake-plugin": ">=1.6.0"
     },
     "extra": {
         "installer-name": "Bootstrap"
