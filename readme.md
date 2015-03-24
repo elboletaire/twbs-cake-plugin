@@ -1,7 +1,7 @@
 Bootstrap plugin for CakePHP 3.X
 ================================
 
-[![Total Downloads](https://poser.pugx.org/elboletaire/twbs-cake-plugin/downloads.svg)](https://packagist.org/packages/elboletaire/twbs-cake-plugin)
+[![Latest Stable Version](https://poser.pugx.org/elboletaire/twbs-cake-plugin/v/stable.svg)](https://packagist.org/packages/elboletaire/twbs-cake-plugin) [![Total Downloads](https://poser.pugx.org/elboletaire/twbs-cake-plugin/downloads.svg)](https://packagist.org/packages/elboletaire/twbs-cake-plugin) [![Latest Unstable Version](https://poser.pugx.org/elboletaire/twbs-cake-plugin/v/unstable.svg)](https://packagist.org/packages/elboletaire/twbs-cake-plugin) [![License](https://poser.pugx.org/elboletaire/twbs-cake-plugin/license.svg)](https://packagist.org/packages/elboletaire/twbs-cake-plugin)
 
 This plugin includes both
 [lessjs](http://lesscss.org/#client-side-usage-browser-options) and
