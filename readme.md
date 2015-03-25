@@ -202,6 +202,16 @@ Dependencies
 - [twbs/bootstrap](https://github.com/twbs/bootstrap):
   [version 3.3.4 (rev. 2f3076f2)](https://github.com/twbs/bootstrap/tree/2f3076f20acb6b34279b1ef77063a8fff33f756e)
 
+About versioning
+----------------
+
+This project started using the same versioning as CakePHP 3.X during its
+development stage. For this reason, I'll continue using this but reserving the
+latest version number for my versions.
+
+This means that any version of this plugin with `3.0.X` version number should be
+compatible with any CakePHP `3.0` version.
+
 License
 -------
 
