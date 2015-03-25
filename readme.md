@@ -195,12 +195,12 @@ you can pass an additional `btnClass` param set to `false` to the button's
 Dependencies
 ------------
 
-- [elboletaire/less-cake-plugin](https://github.com/elboletaire/less-cake-plugin) version >= 1.0.0
+- [elboletaire/less-cake-plugin](https://github.com/elboletaire/less-cake-plugin) version >= 1.6.1
 
 ### Included dependencies
 
 - [twbs/bootstrap](https://github.com/twbs/bootstrap):
-  [version 3.3.2 (rev. 02f8cf9d)](https://github.com/twbs/bootstrap/commit/02f8cf9d0e3758d7fcffcda5ea7ba041b88b5e04)
+  [version 3.3.4 (rev. 2f3076f2)](https://github.com/twbs/bootstrap/tree/2f3076f20acb6b34279b1ef77063a8fff33f756e)
 
 License
 -------
