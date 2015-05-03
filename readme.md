@@ -8,8 +8,9 @@ This plugin includes both
 [less.php](https://github.com/oyejorge/less.php#lessphp) parsers and allows
 you to easilly deploy CakePHP applications with (Twitter) Bootstrap.
 
-With a component and some helpers it automatically replaces cakePHP's elements
-like form inputs and flash messages to be displayed with twitter bootstrap.
+Since version 3.0.2 this plugin dropped its own helpers and components and added
+[friendsofcake/bootstrap-ui](https://github.com/FriendsOfCake/bootstrap-ui)
+as a composer requirement, so you will use all their classes instead.
 
 It also contains bake templates that will help you starting *twitter-bootstraped*
 CakePHP webapps.
@@ -17,11 +18,11 @@ CakePHP webapps.
 General Features
 ----------------
 
-- Parses less files using less.js or less.php.
+- Parses less files using less.js and/or less.php.
 - LessHelper to easily parse files.
-- FormHelper to automatically style forms.
-- FlashComponent to replace alerts.
 - Bake templates.
+- Generic Bootstrap layout.
+- All the included utilities from BootstrapUI plugin.
 
 Installation
 ------------
@@ -49,11 +50,14 @@ After adding the plugin remember to load it in your `config/bootstrap.php` file:
 Plugin::load('Bootstrap', ['bootstrap' => true]);
 ```
 
-If, for any reason, the `psr-4` addition to the `composer.json` file does not
-work, try setting `autoload` to `true` when loading the plugin:
+This will load the Less and BootstrapUI plugins for you.
+
+If you preffer to do this manually, you can load them one by one:
 
 ```php
-Plugin::load('Bootstrap', ['autoload' => true, 'bootstrap' => true]);
+Plugin::load('Bootstrap');
+Plugin::load('Less');
+Plugin::load('BootstrapUI');
 ```
 
 ### Configuration
@@ -64,11 +68,24 @@ After adding the plugin you can add the desired utilities:
 // AppController.php
 public $helpers = [
     'Less.Less', // required for parsing less files
-    'Bootstrap.Form'
+    'BootstrapUI.Form',
+    'BootstrapUI.Html',
+    'BootstrapUI.Flash',
+    'BootstrapUI.Paginator'
 ];
+```
 
-public function initialize() {
-    $this->loadComponent('Bootstrap.Flash');
+Or, if loading them in the AppView:
+
+```php
+// AppView.php
+public function initialize()
+{
+    $this->loadHelper('Less', ['className' => 'Less.Less']);
+    $this->loadHelper('Html', ['className' => 'BootstrapUI.Html']);
+    $this->loadHelper('Form', ['className' => 'BootstrapUI.Form']);
+    $this->loadHelper('Flash', ['className' => 'BootstrapUI.Flash']);
+    $this->loadHelper('Paginator', ['className' => 'BootstrapUI.Paginator']);
 }
 ```
 
@@ -86,9 +103,12 @@ this plugin and [bake your views](#baking-views) with the also included bake
 templates.
 
 For the second case you'll need to
-[create your own layout](#creating-your-own-layout) and load the included
-`webroot/less/cakephp/styles.less` file. It will extend the default baked views'
-styles so they have a twitter bootstrap look and feel.
+[create your own layout](#creating-your-own-layout) and create a stylesheet like
+the included one
+`webroot/less/cakephp/styles.less`.
+
+This file extends the default baked views'
+styles so they have a *CakePHP-Bootstrapped* look and feel.
 
 ### Themes
 
@@ -96,7 +116,7 @@ On both cases you can use the layout included with this plugin as a theme
 (right now there's only the `default` layout):
 
 ```php
-// AppController
+// AppController or AppView
 public $theme = 'Bootstrap';
 
 // or...
@@ -109,6 +129,11 @@ You can also specify it as a layout directly from your template files:
 // any .ctp Template file
 $this->layout = 'Bootstrap.default';
 ```
+
+> You should use the Bootstrap layout if you wanna use `less` files. If you rather
+preffer using css files you may use the
+[BootstrapUI](https://github.com/FriendsOfCake/bootstrap-ui/tree/master/src/Template/Layout)
+layouts.
 
 Last but not least, you can also copy that template to your `Template/Layout`
 folder and then extend the template from your view.
@@ -129,8 +154,12 @@ You can bake your views using the twitter bootstrap templates bundled with this
 plugin. To do so, simply specify the `bootstrap` template when baking your files:
 
 ```bash
-cake bake all articles --theme Bootstrap
+cake bake.bake [subcommand] --theme Bootstrap
 ```
+
+Remember that you can also bake your views using
+[BootstrapUI's bake templates](https://github.com/FriendsOfCake/bootstrap-ui/tree/master/src/Template/Bake).
+Take a look to its readme for more details.
 
 ### Creating your own layout
 
@@ -147,9 +176,12 @@ Finally, load the less file from your view or layout:
 echo $this->Less->less('less/styles.less');
 ```
 
-If you want to extend twitter bootstrap styles I recommend you to copy both
-`bootstrap.less` and `variables.less` files to your `less` folder and customize
-them to your needs.
+If you want to extend twitter bootstrap styles I recommend you to copy the
+`bootstrap.less` file to your `less` folder and customize
+it to your needs. For the `variables.less` create a `custom-variables.less` and
+load it just after `variables.less` in `bootstrap.less` file. Any variable
+defined in that file will overwrite the value defined in `variables.less` and
+your code won't break when updating (Twitter) Bootstrap.
 
 If you'd like to see an example of this you can check the files included in
 `webroot/less/cakephp` specially made to extend the default CakePHP baked
@@ -158,18 +190,33 @@ templates.
 Utilities
 ---------
 
-### FlashComponent
+This plugin "includes" the following utilities (all they come from other plugins):
 
-The **FlashComponent** replaces all flash messages set with `$this->Flash` to
-automatically load the bootstrap flash message template located at
-`src/Template/Element/flash.ctp`.
+- [Less](https://github.com/elboletaire/less-cake-plugin) [LessHelper](https://github.com/elboletaire/less-cake-plugin#usage)
+- [BootstrapUI](https://github.com/FriendsOfCake/bootstrap-ui) [FormHelper](https://github.com/FriendsOfCake/bootstrap-ui#basic-form)
+- [BootstrapUI](https://github.com/FriendsOfCake/bootstrap-ui) [HtmlHelper](https://github.com/FriendsOfCake/bootstrap-ui/blob/master/src/View/Helper/HtmlHelper.php)
+- [BootstrapUI](https://github.com/FriendsOfCake/bootstrap-ui) [FlashHelper](https://github.com/FriendsOfCake/bootstrap-ui/blob/master/src/View/Helper/FlashHelper.php)
+- [BootstrapUI](https://github.com/FriendsOfCake/bootstrap-ui) [PaginatorHelper](https://github.com/FriendsOfCake/bootstrap-ui/blob/master/src/View/Helper/PaginatorHelper.php)
 
-By default the flash messages will show a close button. If you want to disable
-just specify it as param when setting the flash message:
+### A note about Bootstrap's FlashComponent
+
+The old Bootstrap FlashComponent used to have a `close` option that allowed you
+to define whether the flash alert would have a close button or not.
+
+With BootstrapUI FlashHelper this works different. It looks for an
+`alert-dismissible` class (which is set by default) and, if defined, will show
+the close button.
+
+For disabling the close button for the current Flash alert you can do:
 
 ```php
-$this->Flash->danger('Fatal error', ['params' => ['close' => false]]);
+$this->Flash->{whatever}("Hello World", ['params' => ['class' => ['alert']]]);
+
+// where {whatever} is any of the Bootstrap alert classes (danger, info, warning...)
+$this->Flash->success("Hello World", ['params' => ['class' => ['alert']]]);
 ```
+
+> Note that the `class` param is defined as an array.
 
 ### LessHelper
 
@@ -179,23 +226,11 @@ The LessHelper is part of the
 [less cakephp plugin](https://github.com/elboletaire/less-cakephp). Check out
 all its details there.
 
-### FormHelper
-
-Automatically adds some CSS classes to your form elements. Some of the input
-replacements can be found at `src/Config/forms.php`, but many need to be done
-directly from the FormHelper.
-
-All the form elements' classes have been replaced with the twitter bootstrap
-form classes.
-
-> \* Buttons always have the `.btn` class added. If you want to remove the class
-you can pass an additional `btnClass` param set to `false` to the button's
-`$options`.
-
 Dependencies
 ------------
 
 - [elboletaire/less-cake-plugin](https://github.com/elboletaire/less-cake-plugin) version >= 1.6.1
+- [FriendsOfCake/bootstrap-ui](https://github.com/FriendsOfCake/bootstrap-ui) version ~0.3
 
 ### Included dependencies
 

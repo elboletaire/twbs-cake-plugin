@@ -15,7 +15,8 @@
     "require": {
         "php": ">=5.4.19",
         "cakephp/cakephp": "~3.0",
-        "elboletaire/less-cake-plugin": ">=1.6.1"
+        "elboletaire/less-cake-plugin": ">=1.6.1",
+        "friendsofcake/bootstrap-ui": "~0.3"
     },
     "extra": {
         "installer-name": "Bootstrap"
