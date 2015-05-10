@@ -39,9 +39,6 @@ After doing it, composer will ask you for a version. Checkout the
 [package on packagist](https://packagist.org/packages/elboletaire/twbs-cake-plugin)
 to know every available version.
 
-Latest version currently is `3.0.0-rc1`, but you can use `dev-master` to use
-the latest `master HEAD` version.
-
 ### Enabling the plugin
 
 After adding the plugin remember to load it in your `config/bootstrap.php` file:
