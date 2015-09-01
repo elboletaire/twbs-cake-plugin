@@ -18,9 +18,6 @@
         "elboletaire/less-cake-plugin": ">=1.6.1",
         "friendsofcake/bootstrap-ui": "~0.3"
     },
-    "extra": {
-        "installer-name": "Bootstrap"
-    },
     "autoload": {
         "psr-4": {
             "Bootstrap\\": "src"
