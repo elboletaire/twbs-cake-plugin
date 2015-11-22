@@ -234,7 +234,7 @@ Dependencies
 ### Included dependencies
 
 - [twbs/bootstrap](https://github.com/twbs/bootstrap):
-  [version 3.3.4 (rev. 7b9f204c)](https://github.com/twbs/bootstrap/tree/7b9f204cb4b8fa5cb06b2a9233324997c093f629)
+  [version 3.3.5 (rev. 94b4076)](https://github.com/twbs/bootstrap/tree/94b4076)
 
 About versioning
 ----------------
