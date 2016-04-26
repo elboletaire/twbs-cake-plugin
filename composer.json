@@ -10,13 +10,17 @@
     ],
     "description": "Twitter Bootstrap Plugin for CakePHP 3 with bundled less.php and less.js parsers, helpers and bake templates",
     "type": "cakephp-plugin",
-    "keywords": ["cakephp", "bootstrap", "plugin"],
+    "keywords": ["cakephp", "bootstrap", "plugin", "template"],
     "license": "MIT",
+    "support": {
+        "issues": "https://github.com/elboletaire/twbs-cake-plugin/issues",
+        "source": "https://github.com/elboletaire/twbs-cake-plugin.git"
+    },
+    "homepage": "https://github.com/elboletaire/twbs-cake-plugin",
     "require": {
-        "php": ">=5.4.19",
-        "cakephp/cakephp": "~3.0",
-        "elboletaire/less-cake-plugin": ">=1.6.1",
-        "friendsofcake/bootstrap-ui": "~0.3"
+        "cakephp/cakephp": "^3.2",
+        "elboletaire/less-cake-plugin": "^1.6",
+        "friendsofcake/bootstrap-ui": "^0.5"
     },
     "autoload": {
         "psr-4": {
