@@ -116,7 +116,7 @@ On both cases you can use the layout included with this plugin as a theme
 
 ```php
 // AppController or AppView
-public $theme = 'Bootstrap';
+public $theme = 'Bootstrap'; // Property $theme is deprecated. Use $this->viewBuilder()->theme('Bootstrap') instead in beforeRender().
 
 // or...
 public $layout = 'Bootstrap.default';
