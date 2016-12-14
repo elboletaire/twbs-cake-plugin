@@ -111,14 +111,21 @@ styles so they have a *CakePHP-Bootstrapped* look and feel.
 
 ### Themes
 
-On both cases you can use the layout included with this plugin as a theme
+On both cases you can use the layout included with this plugin as a [theme][themes]
 (right now there's only the `default` layout):
 
-```php
+~~~php
 // AppController or AppView
-public $theme = 'Bootstrap'; // Property $theme is deprecated. Use $this->viewBuilder()->theme('Bootstrap') instead in beforeRender().
+public function beforeRender(\Cake\Event\Event $event)
+{
+    $this->viewBuilder()->theme('Bootstrap');
+}
+~~~
 
-// or...
+Or as a layout:
+
+~~~
+// AppController or AppView
 public $layout = 'Bootstrap.default';
 ```
 
@@ -271,3 +278,5 @@ License
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 
+
+[themes]: http://book.cakephp.org/3.0/en/views/themes.html
