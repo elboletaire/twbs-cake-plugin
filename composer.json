@@ -18,9 +18,9 @@
     },
     "homepage": "https://github.com/elboletaire/twbs-cake-plugin",
     "require": {
-        "cakephp/cakephp": "^3.2",
-        "elboletaire/less-cake-plugin": "^1.6",
-        "friendsofcake/bootstrap-ui": "^0.5"
+        "cakephp/cakephp": "^3.3",
+        "elboletaire/less-cake-plugin": "^1.7",
+        "friendsofcake/bootstrap-ui": "^0.6"
     },
     "autoload": {
         "psr-4": {
