@@ -122,10 +122,10 @@ public function beforeRender(\Cake\Event\Event $event)
 
 Or as a layout:
 
-~~~
+~~~php
 // AppController or AppView
 public $layout = 'Bootstrap.default';
-```
+~~~
 
 You can also specify it as a layout directly from your template files:
 
